@@ -1,0 +1,57 @@
+﻿Сборка начата 30.06.2016 0:38:02.
+     1>Проект "C:\Users\Дмитрий\Desktop\Village\Village.vcxproj" в узле 2 (целевые объекты Build).
+     1>ClCompile:
+         C:\Program Files (x86)\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _VC80_UPGRADE=0x0600 /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /Gy- /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\Debug\\" /Fd".\Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt game.cpp glaction.cpp glmath.cpp globjects.cpp glscene.cpp main.cpp sound.cpp
+         sound.cpp
+     1>c:\users\дмитрий\desktop\village\globjects.h(76): warning C4244: аргумент: преобразование "float" в "GLint", возможна потеря данных
+     1>c:\users\дмитрий\desktop\village\glaction.h(277): warning C4244: аргумент: преобразование "GLfloat" в "LONG", возможна потеря данных
+     1>c:\users\дмитрий\desktop\village\game.h(29): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\vc\include\string.h(112): см. объявление "strcpy"
+         main.cpp
+     1>c:\users\дмитрий\desktop\village\globjects.h(76): warning C4244: аргумент: преобразование "float" в "GLint", возможна потеря данных
+     1>c:\users\дмитрий\desktop\village\glaction.h(277): warning C4244: аргумент: преобразование "GLfloat" в "LONG", возможна потеря данных
+     1>c:\users\дмитрий\desktop\village\game.h(29): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\vc\include\string.h(112): см. объявление "strcpy"
+         glscene.cpp
+     1>c:\users\дмитрий\desktop\village\globjects.h(76): warning C4244: аргумент: преобразование "float" в "GLint", возможна потеря данных
+     1>c:\users\дмитрий\desktop\village\glaction.h(277): warning C4244: аргумент: преобразование "GLfloat" в "LONG", возможна потеря данных
+     1>c:\users\дмитрий\desktop\village\game.h(29): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\vc\include\string.h(112): см. объявление "strcpy"
+         globjects.cpp
+     1>c:\users\дмитрий\desktop\village\globjects.h(76): warning C4244: аргумент: преобразование "float" в "GLint", возможна потеря данных
+     1>c:\users\дмитрий\desktop\village\glaction.h(277): warning C4244: аргумент: преобразование "GLfloat" в "LONG", возможна потеря данных
+     1>c:\users\дмитрий\desktop\village\game.h(29): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\vc\include\string.h(112): см. объявление "strcpy"
+         glmath.cpp
+     1>c:\users\дмитрий\desktop\village\globjects.h(76): warning C4244: аргумент: преобразование "float" в "GLint", возможна потеря данных
+     1>c:\users\дмитрий\desktop\village\glaction.h(277): warning C4244: аргумент: преобразование "GLfloat" в "LONG", возможна потеря данных
+     1>c:\users\дмитрий\desktop\village\game.h(29): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\vc\include\string.h(112): см. объявление "strcpy"
+         glaction.cpp
+     1>c:\users\дмитрий\desktop\village\globjects.h(76): warning C4244: аргумент: преобразование "float" в "GLint", возможна потеря данных
+     1>c:\users\дмитрий\desktop\village\glaction.h(277): warning C4244: аргумент: преобразование "GLfloat" в "LONG", возможна потеря данных
+     1>c:\users\дмитрий\desktop\village\game.h(29): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\vc\include\string.h(112): см. объявление "strcpy"
+     1>c:\users\дмитрий\desktop\village\glaction.cpp(1089): warning C4244: аргумент: преобразование "GLfloat" в "LONG", возможна потеря данных
+     1>c:\users\дмитрий\desktop\village\glaction.cpp(1093): warning C4244: аргумент: преобразование "GLfloat" в "LONG", возможна потеря данных
+         game.cpp
+     1>c:\users\дмитрий\desktop\village\globjects.h(76): warning C4244: аргумент: преобразование "float" в "GLint", возможна потеря данных
+     1>c:\users\дмитрий\desktop\village\glaction.h(277): warning C4244: аргумент: преобразование "GLfloat" в "LONG", возможна потеря данных
+     1>c:\users\дмитрий\desktop\village\game.h(29): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\vc\include\string.h(112): см. объявление "strcpy"
+         Создание кода...
+       Link:
+         C:\Program Files (x86)\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\Debug\Village.exe" /INCREMENTAL /NOLOGO odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:".\Debug\Village.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\Debug\Village.lib" /MACHINE:X86 /SAFESEH .\Debug\Script1.res
+         .\Debug\game.obj
+         .\Debug\glaction.obj
+         .\Debug\glmath.obj
+         .\Debug\globjects.obj
+         .\Debug\glscene.obj
+         .\Debug\main.obj
+         .\Debug\sound.obj
+         Village.vcxproj -> C:\Users\Дмитрий\Desktop\Village\.\Debug\Village.exe
+     1>Сборка проекта "C:\Users\Дмитрий\Desktop\Village\Village.vcxproj" завершена (целевые объекты Build).
+
+Сборка успешно завершена.
+
+Затраченное время: 00:00:04.44
