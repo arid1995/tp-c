@@ -1,6 +1,6 @@
 /*
-	Автор(с): Санников, Кулебякин, Ступак и Пархоменко
-	Название команды: AGRAGE
+	РђРІС‚РѕСЂ(СЃ): РЎР°РЅРЅРёРєРѕРІ, РљСѓР»РµР±СЏРєРёРЅ, РЎС‚СѓРїР°Рє Рё РџР°СЂС…РѕРјРµРЅРєРѕ
+	РќР°Р·РІР°РЅРёРµ РєРѕРјР°РЅРґС‹: AGRAGE
 	e-mail:   sdk96@mail.ru
 	Checked: on the surface by arid1995
 */
@@ -42,28 +42,28 @@ xUser::~xUser() {
 
 void  xUser::Create(LPDIRECTSOUND sound) {
 	gun = new xFigure();
-	gun->CreateCylinder(0.5, 0.5, 7.0, 18, 18);//Technoteam: Магические числа
+	gun->CreateCylinder(0.5, 0.5, 7.0, 18, 18);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 
-	//загружаем картинки лазера
+	//Р·Р°РіСЂСѓР¶Р°РµРј РєР°СЂС‚РёРЅРєРё Р»Р°Р·РµСЂР°
 	tex_gun   = xTextura::OpenImage(_T("image\\gun.jpg"));
 	tex_lazer = xTextura::OpenImage(_T("image\\lazer.jpg"));
 
-	//загружаем звуки выстрелов, лазера и шагов
+	//Р·Р°РіСЂСѓР¶Р°РµРј Р·РІСѓРєРё РІС‹СЃС‚СЂРµР»РѕРІ, Р»Р°Р·РµСЂР° Рё С€Р°РіРѕРІ
 	snd_uron = new xSound(sound, _T("sound\\user_uron.wav")); 
 	snd_fire = new xSound(sound, _T("sound\\user_lazer.wav"));
 	snd_step = new xSound(sound, _T("sound\\user_step.wav")); 
 }
 
-//инициализируем юзера
+//РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј СЋР·РµСЂР°
 void  xUser::Initialize(void) {
-	pos    = GLVECTOR3(0.5f, -1.9f, -1.9f);//Technoteam: Магические числа
-	size   = GLVECTOR3(9.5f, 5.0f, 9.5f);//Technoteam: Магические числа
+	pos    = GLVECTOR3(0.5f, -1.9f, -1.9f);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
+	size   = GLVECTOR3(9.5f, 5.0f, 9.5f);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 	ifire  = FALSE;
 	imove  = FALSE;
 	life   = 30;
 }
 
-// вывод пользователя только один бластер на этом хватит
+// РІС‹РІРѕРґ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ С‚РѕР»СЊРєРѕ РѕРґРёРЅ Р±Р»Р°СЃС‚РµСЂ РЅР° СЌС‚РѕРј С…РІР°С‚РёС‚
 void  xUser::Display(GLfloat felapsed, GLfloat ftime) {
 
 	static GLfloat angle = 0.0f;
@@ -73,24 +73,24 @@ void  xUser::Display(GLfloat felapsed, GLfloat ftime) {
 
 	glLoadIdentity();
 	glTranslatef(pos.x, pos.y, pos.z);
-	glRotatef(4.0f, 0.0f, 1.0f, 0.0f);//Technoteam: Магические числа
-	glRotatef(-40.0f, 0.0f, 0.0f, 1.0f);//Technoteam: Магические числа
+	glRotatef(4.0f, 0.0f, 1.0f, 0.0f);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
+	glRotatef(-40.0f, 0.0f, 0.0f, 1.0f);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 	gun->Display();
 
-	if(ifire) { // обработка стрельбы
-		angle += fNUM(felapsed, 8.0f);//Technoteam: Магическое число
-		pos.z  = -1.9f + 1.5f * sinf(angle);//Technoteam: Магические числа
+	if(ifire) { // РѕР±СЂР°Р±РѕС‚РєР° СЃС‚СЂРµР»СЊР±С‹
+		angle += fNUM(felapsed, 8.0f);//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
+		pos.z  = -1.9f + 1.5f * sinf(angle);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 		if(angle > GL_PI) {
 			angle = 0.0f;
-			pos.z = -1.9f;//Technoteam: Магическое число
+			pos.z = -1.9f;//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
 			ifire = FALSE;
 		}
 	}
 
 
-	if(imove) { // обработка ходьбы
-		pos.y = -1.9f - 0.3f * sinf(fstep);//Technoteam: Магические числа
-		fstep += fNUM(felapsed, 4.0f);//Technoteam: Магическое число
+	if(imove) { // РѕР±СЂР°Р±РѕС‚РєР° С…РѕРґСЊР±С‹
+		pos.y = -1.9f - 0.3f * sinf(fstep);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
+		fstep += fNUM(felapsed, 4.0f);//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
 	} else
 		fstep  = 0.0f;
 
@@ -98,19 +98,19 @@ void  xUser::Display(GLfloat felapsed, GLfloat ftime) {
 
 }
 
-// вывод плазменных пуль
+// РІС‹РІРѕРґ РїР»Р°Р·РјРµРЅРЅС‹С… РїСѓР»СЊ
 void  xUser::DisplayLazer(GLfloat felapsed, GLfloat ftime, GLfloat angleY) {
 	
 	xTextura::Set(tex_lazer);
 
-	GLfloat num = fNUM(felapsed, 150.0f);//Technoteam: Магическое число
+	GLfloat num = fNUM(felapsed, 150.0f);//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
 	for(std::list<sBullet>::iterator iter = bullets.begin(); iter != bullets.end(); ++iter) {
 		xModel::DrawRect(&iter->pos, 1.0f, angleY);
 		iter->pos -= iter->vec * num;
 	}
 }
 
-// вывод цели - крестика
+// РІС‹РІРѕРґ С†РµР»Рё - РєСЂРµСЃС‚РёРєР°
 void  xUser::DisplayCross(const LPSIZE pscreen) {
 	glLoadIdentity();
 	glTranslatef(0.0f, 0.0f, 0.0f);
@@ -121,16 +121,16 @@ void  xUser::DisplayCross(const LPSIZE pscreen) {
 	xTextura::Enabled(GL_FALSE);
 	glColor4f(1.0f, 1.0f, 0.0f, 1.0f);
 	glBegin(GL_LINES);
-		glVertex2i(x - 7, y);//Technoteam: Магическое число
-		glVertex2i(x + 7, y);//Technoteam: Магическое число
-		glVertex2i(x, y - 7);//Technoteam: Магическое число
-		glVertex2i(x, y + 7);//Technoteam: Магическое число
+		glVertex2i(x - 7, y);//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
+		glVertex2i(x + 7, y);//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
+		glVertex2i(x, y - 7);//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
+		glVertex2i(x, y + 7);//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
 	glEnd();
 	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 	xTextura::Enabled(GL_TRUE);
 }
 
-// метод выпускает плазменный пучок из бластера	
+// РјРµС‚РѕРґ РІС‹РїСѓСЃРєР°РµС‚ РїР»Р°Р·РјРµРЅРЅС‹Р№ РїСѓС‡РѕРє РёР· Р±Р»Р°СЃС‚РµСЂР°	
 void  xUser::OnFire(WPARAM wParam, const LPGLVECTOR3& hpos, GLfloat felapsed, GLfloat yaw, GLfloat pitch) {
 	if(wParam & MK_LBUTTON) {
 
@@ -138,7 +138,7 @@ void  xUser::OnFire(WPARAM wParam, const LPGLVECTOR3& hpos, GLfloat felapsed, GL
 
 		sBullet  bullet;
 		bullet.pos.x =  hpos->x;
-		bullet.pos.y =  hpos->y - 1.2f;//Technoteam: Магическое число
+		bullet.pos.y =  hpos->y - 1.2f;//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
 		bullet.pos.z = -hpos->z;
 		VectorAngle(&bullet.vec, -yaw, pitch);	
 		bullets.push_back(bullet);
@@ -147,7 +147,7 @@ void  xUser::OnFire(WPARAM wParam, const LPGLVECTOR3& hpos, GLfloat felapsed, GL
 	}
 }
 
-// сигнал о перемещение пользователя
+// СЃРёРіРЅР°Р» Рѕ РїРµСЂРµРјРµС‰РµРЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 void  xUser::SetMove(BOOL move) {
 	if(move)
 		snd_step->Play(DSBPLAY_LOOPING);
@@ -156,10 +156,10 @@ void  xUser::SetMove(BOOL move) {
 	
 	imove = move;
 	if(! move)
-		pos.y = -1.9f;//Technoteam: Магическое число
+		pos.y = -1.9f;//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
 }
 
-//деструктор юзера
+//РґРµСЃС‚СЂСѓРєС‚РѕСЂ СЋР·РµСЂР°
 void  xUser::Destroy(void) {
 	DELETE_HEAP(snd_step);
 	DELETE_HEAP(snd_uron);
@@ -173,7 +173,7 @@ void  xUser::Destroy(void) {
 		bullets.clear();
 }
 
-// убавить жизнь
+// СѓР±Р°РІРёС‚СЊ Р¶РёР·РЅСЊ
 void  xUser::DecLife(void) {
 	life--;
 	snd_uron->Play();
@@ -181,7 +181,7 @@ void  xUser::DecLife(void) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//класс land-полигон
+//РєР»Р°СЃСЃ land-РїРѕР»РёРіРѕРЅ
 xTerrain::xTerrain(void) {
 	fmap       = NULL;
 	vertices   = NULL;
@@ -195,7 +195,7 @@ xTerrain::xTerrain(void) {
 	tex_crush  = 0u;
 	tex_smoke  = 0u;
 	tex        = 0u;
-	top_floor  = 0.6f;//Technoteam: Магическое число
+	top_floor  = 0.6f;//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
 	vidlist    = 0u;
 	size_house = 0;
 	map_rect   = 0;
@@ -205,12 +205,12 @@ xTerrain::xTerrain(void) {
 	ZeroMemory(snd_move, sizeof(snd_move));
 }
 
-//деструтор land-полигона
+//РґРµСЃС‚СЂСѓС‚РѕСЂ land-РїРѕР»РёРіРѕРЅР°
 xTerrain::~xTerrain() {
-	this->Destroy();//Technoteam: Неоправданное использование this
+	this->Destroy();//Technoteam: РќРµРѕРїСЂР°РІРґР°РЅРЅРѕРµ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ this
 }
 	
-// Метод создаёт land-полигон 
+// РњРµС‚РѕРґ СЃРѕР·РґР°С‘С‚ land-РїРѕР»РёРіРѕРЅ 
 bool  xTerrain::Create(LPDIRECTSOUND sound, GLint field_size, GLint step) {
 
 	const GLint vcount = (field_size / step) * (field_size / step);
@@ -220,8 +220,8 @@ bool  xTerrain::Create(LPDIRECTSOUND sound, GLint field_size, GLint step) {
 	vstep     = step;
 	map_size  = field_size;
 	half_size = field_size / 2;
-	vsize     = 12 * vcount;//Technoteam: Магическое число
-	tsize     =  8 * vcount;//Technoteam: Магическое число
+	vsize     = 12 * vcount;//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
+	tsize     =  8 * vcount;//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
 
 	vertices  = new GLfloat[vsize];
 	if(vertices == NULL)
@@ -242,7 +242,7 @@ bool  xTerrain::Create(LPDIRECTSOUND sound, GLint field_size, GLint step) {
 	for(GLint x = 0; x < (field_size - step); x += step) {
 		for(GLint z = 0; z < (field_size - step); z += step) {
 
-			///////////////////// ВЕРШИНЫ///////////////////////////////////
+			///////////////////// Р’Р•Р РЁРРќР«///////////////////////////////////
 			*vptr++ = offx + GLfloat(x);
 			*vptr++ = 0.0f;
 			*vptr++ = offz + GLfloat(z);  
@@ -259,7 +259,7 @@ bool  xTerrain::Create(LPDIRECTSOUND sound, GLint field_size, GLint step) {
 			*vptr++ = 0.0f;
 			*vptr++ = offz + GLfloat(z);
 
-			////////////////////////////НОРМАЛИ/////////////////////////////
+			////////////////////////////РќРћР РњРђР›Р/////////////////////////////
 			for(GLint k = 0; k < 4; k++) {
 				*nptr++ = 0.0f;
 				*nptr++ = 1.0f;
@@ -270,16 +270,16 @@ bool  xTerrain::Create(LPDIRECTSOUND sound, GLint field_size, GLint step) {
 
 	vsize /= 3;
 
-	trees.resize(880u);  // чтобы не париться с реаллокациями выделить заранее память из кучи
-				//Technoteam: Магическое число, может не хватить памяти при масштабировании
+	trees.resize(880u);  // С‡С‚РѕР±С‹ РЅРµ РїР°СЂРёС‚СЊСЃСЏ СЃ СЂРµР°Р»Р»РѕРєР°С†РёСЏРјРё РІС‹РґРµР»РёС‚СЊ Р·Р°СЂР°РЅРµРµ РїР°РјСЏС‚СЊ РёР· РєСѓС‡Рё
+				//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ, РјРѕР¶РµС‚ РЅРµ С…РІР°С‚РёС‚СЊ РїР°РјСЏС‚Рё РїСЂРё РјР°СЃС€С‚Р°Р±РёСЂРѕРІР°РЅРёРё
 
 	vidlist = glGenLists(4);
-	this->compile_tree(vidlist, 0,      5.4f, 11.4f);//Technoteam: Магические числа, неоправданное использование this
-	this->compile_tree(vidlist + 1, 1,  6.4f, 15.4f);//Technoteam: Магические числа, неоправданное использование this
-	this->compile_tree(vidlist + 2, 2,  4.8f, 12.4f);//Technoteam: Магические числа, неоправданное использование this
-	this->compile_tree(vidlist + 3, 3,  2.0f, 4.1f);//Technoteam: Магические числа, неоправданное использование this
+	this->compile_tree(vidlist, 0,      5.4f, 11.4f);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°, РЅРµРѕРїСЂР°РІРґР°РЅРЅРѕРµ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ this
+	this->compile_tree(vidlist + 1, 1,  6.4f, 15.4f);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°, РЅРµРѕРїСЂР°РІРґР°РЅРЅРѕРµ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ this
+	this->compile_tree(vidlist + 2, 2,  4.8f, 12.4f);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°, РЅРµРѕРїСЂР°РІРґР°РЅРЅРѕРµ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ this
+	this->compile_tree(vidlist + 3, 3,  2.0f, 4.1f);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°, РЅРµРѕРїСЂР°РІРґР°РЅРЅРѕРµ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ this
 
-	house_size = GLVECTOR3(6.5f, 5.5f, 7.5f);//Technoteam: Магические числа
+	house_size = GLVECTOR3(6.5f, 5.5f, 7.5f);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 
 	robot_tm.Create(_T("image\\skull.jpg"), _T("image\\circle.jpg"));
 	robot_fly.Create(_T("image\\skull2.jpg"));
@@ -299,7 +299,7 @@ bool  xTerrain::Create(LPDIRECTSOUND sound, GLint field_size, GLint step) {
 	return true;
 }
 
-// Метод инициализирует ландшафт
+// РњРµС‚РѕРґ РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµС‚ Р»Р°РЅРґС€Р°С„С‚
 void   xTerrain::Initialize(const LPGLVECTOR3& user_pos) {
 	robots_fly[0].Initialize(user_pos, 0.0f, -CubeSize() - 10.0f);
 	robots_fly[1].Initialize(user_pos, 0.0f,  CubeSize() + 10.0f);
@@ -308,9 +308,9 @@ void   xTerrain::Initialize(const LPGLVECTOR3& user_pos) {
 	robots_tm[1].Initialize(user_pos, -CubeSize() + 10.0f, 0.0f);
 }
 
-// Метод для вычисления падающей тени на плоскость
+// РњРµС‚РѕРґ РґР»СЏ РІС‹С‡РёСЃР»РµРЅРёСЏ РїР°РґР°СЋС‰РµР№ С‚РµРЅРё РЅР° РїР»РѕСЃРєРѕСЃС‚СЊ
 void  xTerrain::SetLightPos(const LPGLVECTOR4& light) {
-	GLfloat y = max(houses[0].y, max(houses[1].y, houses[2].y)) - house_size.y * 2.2f;//Technoteam: Магическое число
+	GLfloat y = max(houses[0].y, max(houses[1].y, houses[2].y)) - house_size.y * 2.2f;//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
 	GLVECTOR3 dots[3] = {
 		GLVECTOR3(CubeSize(),  y, -CubeSize()), 
 		GLVECTOR3(-CubeSize(), y, -CubeSize()),
@@ -321,7 +321,7 @@ void  xTerrain::SetLightPos(const LPGLVECTOR4& light) {
 	MatrixShadow(house_shadow, &plane, light);
 }
 
-// Метод для вычисления падающей тени на плоскость для сторонних объектов игры
+// РњРµС‚РѕРґ РґР»СЏ РІС‹С‡РёСЃР»РµРЅРёСЏ РїР°РґР°СЋС‰РµР№ С‚РµРЅРё РЅР° РїР»РѕСЃРєРѕСЃС‚СЊ РґР»СЏ СЃС‚РѕСЂРѕРЅРЅРёС… РѕР±СЉРµРєС‚РѕРІ РёРіСЂС‹
 GLfloat  xTerrain::GetPlaneShadow(GLfloat* mat, LPGLVECTOR3 pos, const LPGLVECTOR4& light) {
 	GLfloat h = this->GetOffsetTop(pos->x, pos->z);
 	
@@ -337,7 +337,7 @@ GLfloat  xTerrain::GetPlaneShadow(GLfloat* mat, LPGLVECTOR3 pos, const LPGLVECTO
 	return h;
 }
 
-// Компиляция списка(дерево) запишем в видеопамять
+// РљРѕРјРїРёР»СЏС†РёСЏ СЃРїРёСЃРєР°(РґРµСЂРµРІРѕ) Р·Р°РїРёС€РµРј РІ РІРёРґРµРѕРїР°РјСЏС‚СЊ
 void  xTerrain::compile_tree(GLuint lid, GLuint tid, GLfloat x, GLfloat y) {
 	glNewList(lid, GL_COMPILE);
 		xTextura::Set(tex_tree[tid]);
@@ -354,7 +354,7 @@ void  xTerrain::compile_tree(GLuint lid, GLuint tid, GLfloat x, GLfloat y) {
 	glEndList();
 }
 
-// Метод выводит ландшафт
+// РњРµС‚РѕРґ РІС‹РІРѕРґРёС‚ Р»Р°РЅРґС€Р°С„С‚
 void  xTerrain::Display(void) {
 
 	xTextura::Set(tex);
@@ -373,21 +373,21 @@ void  xTerrain::Display(void) {
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
-//Technoteam: Неинформативный комментарий
+//Technoteam: РќРµРёРЅС„РѕСЂРјР°С‚РёРІРЅС‹Р№ РєРѕРјРјРµРЅС‚Р°СЂРёР№
 // 0  1  2   3    11 12 13 14
 // 4  5  6   7    21 22 23 24
 // 8  9  10  11	  31 32 33 34
 // 12 13 14  15   41 42 43 44
-// Вывод растительности
+// Р’С‹РІРѕРґ СЂР°СЃС‚РёС‚РµР»СЊРЅРѕСЃС‚Рё
 void  xTerrain::DisplayVegetations(const LPGLVECTOR3& user_pos, GLfloat angleY, GLfloat ftime, GLfloat felapsed) {
 	GLfloat mat[16];
 
 	MatrixIdentity(mat);
-	MatrixRotateY(mat, angleY); // преобразование поворота в область просмотра камеры выполняется один раз для всех биллбордов-деревьев
+	MatrixRotateY(mat, angleY); // РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ РїРѕРІРѕСЂРѕС‚Р° РІ РѕР±Р»Р°СЃС‚СЊ РїСЂРѕСЃРјРѕС‚СЂР° РєР°РјРµСЂС‹ РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ РѕРґРёРЅ СЂР°Р· РґР»СЏ РІСЃРµС… Р±РёР»Р»Р±РѕСЂРґРѕРІ-РґРµСЂРµРІСЊРµРІ
 	
 	for(std::vector<sTree>::const_iterator citer = trees.begin(); citer != trees.end(); ++citer) {
 		
-		// трансляция для каждого дерева
+		// С‚СЂР°РЅСЃР»СЏС†РёСЏ РґР»СЏ РєР°Р¶РґРѕРіРѕ РґРµСЂРµРІР°
 		mat[12] = citer->x;
 		mat[13] = citer->y;
 		mat[14] = citer->z;	
@@ -399,53 +399,53 @@ void  xTerrain::DisplayVegetations(const LPGLVECTOR3& user_pos, GLfloat angleY, 
 	}
 
 
-	// Вывод взрыва летающего робота
+	// Р’С‹РІРѕРґ РІР·СЂС‹РІР° Р»РµС‚Р°СЋС‰РµРіРѕ СЂРѕР±РѕС‚Р°
 	for(sRobotFly* pfly = robots_fly; pfly != robots_fly + sRobotFly::MAX_ROBOTS_FLY; *pfly++) {
 		if(pfly->IsCrush())
 			pfly->DisplayEffect(user_pos, tex_crush, angleY, felapsed, ftime);
 	}
 
 
-	// Вывод взрыва TM-робота
+	// Р’С‹РІРѕРґ РІР·СЂС‹РІР° TM-СЂРѕР±РѕС‚Р°
 	for(sRobotTM* ptm = robots_tm; ptm != robots_tm + sRobotTM::MAX_ROBOTS_TM; *ptm++) {
 		if(ptm->IsCrush())
 			ptm->DisplayEffect(user_pos, tex_crush, angleY, felapsed, ftime);
 	}
 }
 	
-// вывод домиков
+// РІС‹РІРѕРґ РґРѕРјРёРєРѕРІ
 void  xTerrain::DisplayObjects(void) {
 	for(LPGLVECTOR3 pvec = houses; pvec != houses + size_house; *pvec++)
 		xModel::DrawHouse(pvec, &house_size,  tex_house[1], tex_house[0]);
 }
 
-// вывод теней от домиков
+// РІС‹РІРѕРґ С‚РµРЅРµР№ РѕС‚ РґРѕРјРёРєРѕРІ
 void  xTerrain::DisplayShadow(void) {
 	for(LPGLVECTOR3 pvec = houses; pvec != houses + size_house; *pvec++)
 		xModel::ShadowHouse(pvec, &house_size, house_shadow);	
 }
 
 /////**********************************************************************************************
-// Метод выводит в сцену роботов
+// РњРµС‚РѕРґ РІС‹РІРѕРґРёС‚ РІ СЃС†РµРЅСѓ СЂРѕР±РѕС‚РѕРІ
 void  xTerrain::DisplayRobots(const LPGLVECTOR3& user_pos, GLfloat felapsed, GLfloat ftime) {
 	GLVECTOR3 scube = house_size;
 	GLfloat h;
 
-	scube   += 0.1f;//Technoteam: Магическое число
-	scube.y += 3.0f;//Technoteam: Магические числа
+	scube   += 0.1f;//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
+	scube.y += 3.0f;//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 
-	// вывод летающих роботов
+	// РІС‹РІРѕРґ Р»РµС‚Р°СЋС‰РёС… СЂРѕР±РѕС‚РѕРІ
 	for(sRobotFly* pfly = robots_fly; pfly != robots_fly + sRobotFly::MAX_ROBOTS_FLY; *pfly++) {
 		pfly->UpdateMove(user_pos, CubeSize(), felapsed, ftime);
 
-		if(pfly->IsTaskPush()) { // если задание настигнуть пользователя нужно чтобы робот не провалился в ландшафт
+		if(pfly->IsTaskPush()) { // РµСЃР»Рё Р·Р°РґР°РЅРёРµ РЅР°СЃС‚РёРіРЅСѓС‚СЊ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РЅСѓР¶РЅРѕ С‡С‚РѕР±С‹ СЂРѕР±РѕС‚ РЅРµ РїСЂРѕРІР°Р»РёР»СЃСЏ РІ Р»Р°РЅРґС€Р°С„С‚
 			h = this->GetOffsetTop(pfly->pos.x, pfly->pos.z);
-			if(h < (pfly->pos.y + 8.0f)) {//Technoteam: Магические числа
-				pfly->pos.y *= 0.9f;//Technoteam: Магические числа
-				pfly->pos.y += (1.0f - 0.9f) * h + 1.0f;//Technoteam: Магическое число
+			if(h < (pfly->pos.y + 8.0f)) {//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
+				pfly->pos.y *= 0.9f;//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
+				pfly->pos.y += (1.0f - 0.9f) * h + 1.0f;//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
 			}
 
-			// столкновения с домиками
+			// СЃС‚РѕР»РєРЅРѕРІРµРЅРёСЏ СЃ РґРѕРјРёРєР°РјРё
 			for(LPGLVECTOR3 hptr = houses; hptr != houses + MAX_HOUSES; ++hptr) 
 				IsRectIntersect(&pfly->pos, &GLVECTOR3(9.0f), hptr, &scube);
 		}
@@ -455,17 +455,17 @@ void  xTerrain::DisplayRobots(const LPGLVECTOR3& user_pos, GLfloat felapsed, GLf
 	}
 
 
-	// вывод TM-роботов
+	// РІС‹РІРѕРґ TM-СЂРѕР±РѕС‚РѕРІ
 	for(sRobotTM* ptm = robots_tm; ptm != robots_tm + sRobotTM::MAX_ROBOTS_TM; *ptm++) {
 		ptm->UpdateMove(user_pos, CubeSize(), felapsed, ftime);
 
 		h = this->GetOffsetTop(ptm->pos.x, ptm->pos.z);
-		ptm->pos.y *= 0.9f;//Technoteam: Магическое число
-		ptm->pos.y += (1.0f - 0.9f) * h;//Technoteam: Магическое число
+		ptm->pos.y *= 0.9f;//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
+		ptm->pos.y += (1.0f - 0.9f) * h;//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
 		
-		// столкновения с домиками
+		// СЃС‚РѕР»РєРЅРѕРІРµРЅРёСЏ СЃ РґРѕРјРёРєР°РјРё
 		for(LPGLVECTOR3 hptr = houses; hptr != houses + MAX_HOUSES; ++hptr) {
-			if(IsRectIntersect(&ptm->pos, &GLVECTOR3(9.0f), hptr, &scube))//Technoteam: Магическое число
+			if(IsRectIntersect(&ptm->pos, &GLVECTOR3(9.0f), hptr, &scube))//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
 				ptm->ResetTask();
 		}
 	
@@ -474,40 +474,40 @@ void  xTerrain::DisplayRobots(const LPGLVECTOR3& user_pos, GLfloat felapsed, GLf
 	}
 }
 
-// Метод выводит падающие тени от роботoв(не стал расчитывать каждую вершину и смежные вершины, нормаль)
-// корявые тени
+// РњРµС‚РѕРґ РІС‹РІРѕРґРёС‚ РїР°РґР°СЋС‰РёРµ С‚РµРЅРё РѕС‚ СЂРѕР±РѕС‚oРІ(РЅРµ СЃС‚Р°Р» СЂР°СЃС‡РёС‚С‹РІР°С‚СЊ РєР°Р¶РґСѓСЋ РІРµСЂС€РёРЅСѓ Рё СЃРјРµР¶РЅС‹Рµ РІРµСЂС€РёРЅС‹, РЅРѕСЂРјР°Р»СЊ)
+// РєРѕСЂСЏРІС‹Рµ С‚РµРЅРё
 void  xTerrain::DisplayShadowRobots(const LPGLVECTOR4& light_pos) {
 	GLfloat mat[16];
 	GLVECTOR3 pos;
 
-	// вывод теней летающих роботов
+	// РІС‹РІРѕРґ С‚РµРЅРµР№ Р»РµС‚Р°СЋС‰РёС… СЂРѕР±РѕС‚РѕРІ
 	for(sRobotFly* pfly = robots_fly; pfly != robots_fly + sRobotFly::MAX_ROBOTS_FLY; *pfly++) {
 		if(pfly->IsTaskPush() && (! pfly->IsCrush())) {
 			pos   = pfly->pos;
-			pos.y = this->GetPlaneShadow(mat, &pos, light_pos) + 5.0f;//Technoteam: Магическое число, неоправданное использование this
+			pos.y = this->GetPlaneShadow(mat, &pos, light_pos) + 5.0f;//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ, РЅРµРѕРїСЂР°РІРґР°РЅРЅРѕРµ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ this
 			robot_fly.DisplayShadow(&pos, pfly->rotY, pfly->fangle, mat);
 		}
 	}
 
-	// вывод теней TM-роботов
+	// РІС‹РІРѕРґ С‚РµРЅРµР№ TM-СЂРѕР±РѕС‚РѕРІ
 	for(sRobotTM* ptm = robots_tm; ptm != robots_tm + sRobotTM::MAX_ROBOTS_TM; *ptm++) {
 		if(! ptm->IsCrush()) {
 			pos   = ptm->pos;
-			pos.y = this->GetPlaneShadow(mat, &pos, light_pos) + 5.0f;//Technoteam: Магическое число, неоправданное использование this
+			pos.y = this->GetPlaneShadow(mat, &pos, light_pos) + 5.0f;//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ, РЅРµРѕРїСЂР°РІРґР°РЅРЅРѕРµ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ this
 			robot_tm.DisplayShadow(&pos, &ptm->rot, mat);
 		}
 	}
 }
 
-// Метод выводит эффекты для роботов
+// РњРµС‚РѕРґ РІС‹РІРѕРґРёС‚ СЌС„С„РµРєС‚С‹ РґР»СЏ СЂРѕР±РѕС‚РѕРІ
 void    xTerrain::DisplayEffectRobots(const LPGLVECTOR3& user_pos, GLfloat angleY, GLfloat felapsed, GLfloat ftime) {
-	// вывод эффектов летающих роботов
+	// РІС‹РІРѕРґ СЌС„С„РµРєС‚РѕРІ Р»РµС‚Р°СЋС‰РёС… СЂРѕР±РѕС‚РѕРІ
 	for(sRobotFly* pfly = robots_fly; pfly != robots_fly + sRobotFly::MAX_ROBOTS_FLY; *pfly++) {
 		if(pfly->IsUron())
 			pfly->DisplayEffect(user_pos, tex_smoke, angleY, felapsed, ftime);
 	}
 
-	// вывод эффектов роботов-TM
+	// РІС‹РІРѕРґ СЌС„С„РµРєС‚РѕРІ СЂРѕР±РѕС‚РѕРІ-TM
 	for(sRobotTM* ptm = robots_tm; ptm  != robots_tm + sRobotTM::MAX_ROBOTS_TM; *ptm++) {
 		if(ptm->IsUron())
 			ptm->DisplayEffect(user_pos, tex_smoke, angleY, felapsed, ftime);
@@ -516,7 +516,7 @@ void    xTerrain::DisplayEffectRobots(const LPGLVECTOR3& user_pos, GLfloat angle
 
 /////**********************************************************************************************
 
-// Установка положения ландшафта
+// РЈСЃС‚Р°РЅРѕРІРєР° РїРѕР»РѕР¶РµРЅРёСЏ Р»Р°РЅРґС€Р°С„С‚Р°
 void  xTerrain::BeginMatrix(const LPGLVECTOR3& hpos) {
 	glPushMatrix();
 	glTranslatef(hpos->x, hpos->y, hpos->z);
@@ -526,27 +526,27 @@ void  xTerrain::EndMatrix(void) {
 	glPopMatrix();
 }
 
-// Получения ячейки для координаты Y по указанной строке и столбцу X-Z
+// РџРѕР»СѓС‡РµРЅРёСЏ СЏС‡РµР№РєРё РґР»СЏ РєРѕРѕСЂРґРёРЅР°С‚С‹ Y РїРѕ СѓРєР°Р·Р°РЅРЅРѕР№ СЃС‚СЂРѕРєРµ Рё СЃС‚РѕР»Р±С†Сѓ X-Z
 inline  GLfloat xTerrain::Offset(GLint x, GLint y) {
 	x = min(x, map_size - 1);
 	y = min(y, map_size - 1);
 	
 	GLint index = (y * map_size) + x;
 
-	// обезопасить выход индекса за массив, это страшная ошибка
+	// РѕР±РµР·РѕРїР°СЃРёС‚СЊ РІС‹С…РѕРґ РёРЅРґРµРєСЃР° Р·Р° РјР°СЃСЃРёРІ, СЌС‚Рѕ СЃС‚СЂР°С€РЅР°СЏ РѕС€РёР±РєР°
 	if((index >= map_rect) || (index < 0)) 
 		return 0.0f;
 	return fmap[index];
 }
 	
-// То же самое как и предыдущий метод
+// РўРѕ Р¶Рµ СЃР°РјРѕРµ РєР°Рє Рё РїСЂРµРґС‹РґСѓС‰РёР№ РјРµС‚РѕРґ
 inline  GLfloat xTerrain::GetOffsetTop(GLfloat x, GLfloat z) {
 	GLint ix = GLint(x);
 	GLint iz = GLint(z);
 	return this->Offset(ABS(half_size + ix), ABS(half_size + iz));
 }
 
-// Метод расчитывает нормаль для ландшафта(карты высот)
+// РњРµС‚РѕРґ СЂР°СЃС‡РёС‚С‹РІР°РµС‚ РЅРѕСЂРјР°Р»СЊ РґР»СЏ Р»Р°РЅРґС€Р°С„С‚Р°(РєР°СЂС‚С‹ РІС‹СЃРѕС‚)
 void  xTerrain::Normalize(void) {
 	
 	GLfloat*  vptr = vertices;
@@ -599,7 +599,7 @@ void  xTerrain::Normalize(void) {
 
 }
 
-// Загрузка текстуры для карты высот
+// Р—Р°РіСЂСѓР·РєР° С‚РµРєСЃС‚СѓСЂС‹ РґР»СЏ РєР°СЂС‚С‹ РІС‹СЃРѕС‚
 void   xTerrain::LoadTextura(const TCHAR* filename) {
 	ZeroMemory(tex_tree, sizeof(tex_tree));
 
@@ -614,7 +614,7 @@ void   xTerrain::LoadTextura(const TCHAR* filename) {
 	tex_house[1] = xTextura::OpenImage(_T("image\\house2.jpg"), GL_TRUE);
 }
 
-// Метод по загрузке карты высот формата файла RAW
+// РњРµС‚РѕРґ РїРѕ Р·Р°РіСЂСѓР·РєРµ РєР°СЂС‚С‹ РІС‹СЃРѕС‚ С„РѕСЂРјР°С‚Р° С„Р°Р№Р»Р° RAW
 bool  xTerrain::LoadTerrain(const TCHAR* raw_filename, GLfloat scale) {
 
 	HANDLE fp = CreateFile(raw_filename, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
@@ -665,14 +665,14 @@ bool  xTerrain::LoadTerrain(const TCHAR* raw_filename, GLfloat scale) {
 			*vptr++;
 		}
 	}
-	this->Normalize();//Technoteam: Неоправданный this
-	this->ObjectsToField();//Technoteam: Неоправданный this
+	this->Normalize();//Technoteam: РќРµРѕРїСЂР°РІРґР°РЅРЅС‹Р№ this
+	this->ObjectsToField();//Technoteam: РќРµРѕРїСЂР°РІРґР°РЅРЅС‹Р№ this
 	return true;
 }
 
 //    0 ... 1024
 // -512  |  512
-// Метод вычисляет положение камеры и устанавливает камеру по оси-Y на позицию поверхности карты высот
+// РњРµС‚РѕРґ РІС‹С‡РёСЃР»СЏРµС‚ РїРѕР»РѕР¶РµРЅРёРµ РєР°РјРµСЂС‹ Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ РєР°РјРµСЂСѓ РїРѕ РѕСЃРё-Y РЅР° РїРѕР·РёС†РёСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚Рё РєР°СЂС‚С‹ РІС‹СЃРѕС‚
 void   xTerrain::OffsetCameraY(LPGLVECTOR3 pos) {
 
 	GLint x = GLint(pos->x);
@@ -681,8 +681,8 @@ void   xTerrain::OffsetCameraY(LPGLVECTOR3 pos) {
 	x = ABS(half_size + x);
 	z = ABS(half_size + z);
 
-	pos->y *= 0.9f;//Technoteam: Магическое число
-	pos->y += Offset(x, z) * (1.0f - 0.9f) + top_floor;//Technoteam: Магическое число
+	pos->y *= 0.9f;//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
+	pos->y += Offset(x, z) * (1.0f - 0.9f) + top_floor;//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
 	
 }
 
@@ -694,7 +694,7 @@ void   xTerrain::RectOffset(GLint x, GLint z, GLfloat* arr) {
 }
 
 void   xTerrain::ObjectsToField(void) {
-	const GLfloat tcoord[] = {  // текстурные координаты для натягивания на карту высот
+	const GLfloat tcoord[] = {  // С‚РµРєСЃС‚СѓСЂРЅС‹Рµ РєРѕРѕСЂРґРёРЅР°С‚С‹ РґР»СЏ РЅР°С‚СЏРіРёРІР°РЅРёСЏ РЅР° РєР°СЂС‚Сѓ РІС‹СЃРѕС‚
 		0.0f, 0.0f, 0.5f, 0.0f, 0.0f, 0.5f, 0.5f, 0.5f,  
 		0.5f, 0.0f, 1.0f, 0.0f, 0.5f, 0.5f, 1.0f, 0.5f,
 		0.5f, 0.5f, 1.0f, 0.5f, 0.5f, 1.0f, 1.0f, 1.0f,
@@ -714,9 +714,9 @@ void   xTerrain::ObjectsToField(void) {
 	for(GLint x = 0; x < (map_size - vstep); x += vstep) {
 		for(GLint z = 0; z < (map_size - vstep); z += vstep) {
 
-			this->RectOffset(x, z, off);//Technoteam: Неоправданный this
+			this->RectOffset(x, z, off);//Technoteam: РќРµРѕРїСЂР°РІРґР°РЅРЅС‹Р№ this
 			
-			// натяжка текстуры
+			// РЅР°С‚СЏР¶РєР° С‚РµРєСЃС‚СѓСЂС‹
 			if(off[0] > 8) 
 				CopyMemory(tptr, tcoord, sizeof(GLfloat) * 8);
 			else if(off[0] > 3) 
@@ -726,8 +726,8 @@ void   xTerrain::ObjectsToField(void) {
 			tptr += 8;
 
 
-			// расставляем деревья только на холмы
-			if((off[0] > 49) && (fabsf(vptr[2] - tmp) > 30.0f)) {  //Technoteam: Магические числа
+			// СЂР°СЃСЃС‚Р°РІР»СЏРµРј РґРµСЂРµРІСЊСЏ С‚РѕР»СЊРєРѕ РЅР° С…РѕР»РјС‹
+			if((off[0] > 49) && (fabsf(vptr[2] - tmp) > 30.0f)) {  //Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 				GLuint id = GLuint(rand() % 3);
 				if(iter != trees.end()) 
 					*iter++ = sTree(vidlist + id, vptr[0], off[0], vptr[2]);
@@ -735,30 +735,30 @@ void   xTerrain::ObjectsToField(void) {
 			} 
 
 
-			// раставляем домики
-			if((off[0] < 0.5f) && (size_house < MAX_HOUSES) && (fabsf(vptr[0] - pos) > 60.0f && x > 50)) {//Technoteam: Магические числа
+			// СЂР°СЃС‚Р°РІР»СЏРµРј РґРѕРјРёРєРё
+			if((off[0] < 0.5f) && (size_house < MAX_HOUSES) && (fabsf(vptr[0] - pos) > 60.0f && x > 50)) {//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 
-				hmax = max(hmax, max(off[3], max(off[0], max(off[1], off[2]))) + 5.8f);//Technoteam: Магические числа
+				hmax = max(hmax, max(off[3], max(off[0], max(off[1], off[2]))) + 5.8f);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 				houses[size_house++] = GLVECTOR3(vptr[0], hmax, vptr[2]);
 				pos  = vptr[0];
 
-			} else if(off[0] < 1.0f){ // раcставляем кусты
+			} else if(off[0] < 1.0f){ // СЂР°cСЃС‚Р°РІР»СЏРµРј РєСѓСЃС‚С‹
 				
 				if(iter != trees.end()) 
-					*iter++ = sTree(vidlist + 3, vptr[0] - fRAND(2, 10), off[0] + 0.7f, vptr[2] + fRAND(2, 10));//Technoteam: Магические числа
+					*iter++ = sTree(vidlist + 3, vptr[0] - fRAND(2, 10), off[0] + 0.7f, vptr[2] + fRAND(2, 10));//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 			}
 
-			vptr += 12;//Technoteam: Магическое число
+			vptr += 12;//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
 		}
 	}	
 }
 
-// Метод устанавливает высоту камеры над землёй
+// РњРµС‚РѕРґ СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ РІС‹СЃРѕС‚Сѓ РєР°РјРµСЂС‹ РЅР°Рґ Р·РµРјР»С‘Р№
 void  xTerrain::SetTopFloor(GLfloat top) {
 	top_floor = top;
 }
 
-// Метод удаляет карту высот из памяти и вершины
+// РњРµС‚РѕРґ СѓРґР°Р»СЏРµС‚ РєР°СЂС‚Сѓ РІС‹СЃРѕС‚ РёР· РїР°РјСЏС‚Рё Рё РІРµСЂС€РёРЅС‹
 void  xTerrain::Destroy(void) {
 
 	for(int k = 0; k < 2; k++) {
@@ -802,23 +802,23 @@ void  xTerrain::Destroy(void) {
 
 
 
-// Метод про проверке пуль на столкновения с ландшафтными объектами
+// РњРµС‚РѕРґ РїСЂРѕ РїСЂРѕРІРµСЂРєРµ РїСѓР»СЊ РЅР° СЃС‚РѕР»РєРЅРѕРІРµРЅРёСЏ СЃ Р»Р°РЅРґС€Р°С„С‚РЅС‹РјРё РѕР±СЉРµРєС‚Р°РјРё
 void  xTerrain::CollisionBullet(const LPGLVECTOR3& user_pos, std::list<sBullet>* plist) {
 	int ret;
 	GLVECTOR3 scube = house_size;
 	GLfloat  cube   = this->CubeSize();
 	GLVECTOR3 tmp;
 
-	scube   += 0.1f;//Technoteam: Магическое число
-	scube.y += 3.0f;//Technoteam: Магическое число
+	scube   += 0.1f;//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
+	scube.y += 3.0f;//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
 
-	// цикл по всем пулям
+	// С†РёРєР» РїРѕ РІСЃРµРј РїСѓР»СЏРј
 	for(std::list<sBullet>::iterator iter = plist->begin(); iter != plist->end(); ++iter) {
 
-		// предыдущия позиция пули
+		// РїСЂРµРґС‹РґСѓС‰РёСЏ РїРѕР·РёС†РёСЏ РїСѓР»Рё
 		tmp = iter->pos + iter->vec;
 
-		// столкновения пуль с домиками
+		// СЃС‚РѕР»РєРЅРѕРІРµРЅРёСЏ РїСѓР»СЊ СЃ РґРѕРјРёРєР°РјРё
 		for(LPGLVECTOR3 hptr = houses; hptr != houses + MAX_HOUSES; ++hptr) {
 			if(IsCollisionPointRect(&tmp, hptr, &scube)) {
 				iter = plist->erase(iter);
@@ -827,18 +827,18 @@ void  xTerrain::CollisionBullet(const LPGLVECTOR3& user_pos, std::list<sBullet>*
 			}
 		}
 		
-		// проверка итератора на валидность и выхода за узел
+		// РїСЂРѕРІРµСЂРєР° РёС‚РµСЂР°С‚РѕСЂР° РЅР° РІР°Р»РёРґРЅРѕСЃС‚СЊ Рё РІС‹С…РѕРґР° Р·Р° СѓР·РµР»
 		if(iter == plist->end())
 			break;
 		tmp = iter->pos + iter->vec;
 
 
-		// столкновения пуль c летающимu роботам
+		// СЃС‚РѕР»РєРЅРѕРІРµРЅРёСЏ РїСѓР»СЊ c Р»РµС‚Р°СЋС‰РёРјu СЂРѕР±РѕС‚Р°Рј
 		for(sRobotFly* pfly = robots_fly; pfly != robots_fly + sRobotFly::MAX_ROBOTS_FLY; ++pfly) {
 			if((ret = pfly->IsCollision(&tmp, 1.0f)) != 0) {
 				iter = plist->erase(iter);
 				//--iter;
-				this->play_sound(&pfly->pos, user_pos, ret);//Technoteam: Неоправданный this
+				this->play_sound(&pfly->pos, user_pos, ret);//Technoteam: РќРµРѕРїСЂР°РІРґР°РЅРЅС‹Р№ this
 				break;
 			}
 		}
@@ -847,12 +847,12 @@ void  xTerrain::CollisionBullet(const LPGLVECTOR3& user_pos, std::list<sBullet>*
 		tmp = iter->pos + iter->vec;
 
 
-		// столкновения пуль c TM-роботам
+		// СЃС‚РѕР»РєРЅРѕРІРµРЅРёСЏ РїСѓР»СЊ c TM-СЂРѕР±РѕС‚Р°Рј
 		for(sRobotTM* ptm = robots_tm; ptm != robots_tm + sRobotTM::MAX_ROBOTS_TM; ++ptm) {
 			if((ret = ptm->IsCollision(&tmp, 1.0f)) != 0) {
 				iter = plist->erase(iter);
 				//--iter;
-				this->play_sound(&ptm->pos, user_pos, ret);//Technoteam: Неоправданный this
+				this->play_sound(&ptm->pos, user_pos, ret);//Technoteam: РќРµРѕРїСЂР°РІРґР°РЅРЅС‹Р№ this
 				break;
 			}
 		}
@@ -860,8 +860,8 @@ void  xTerrain::CollisionBullet(const LPGLVECTOR3& user_pos, std::list<sBullet>*
 			break;
 		tmp = iter->pos + iter->vec;
 
-		//Technoteam: Неиспользуемый код (мусор)
-		// удаление пуль за вылет ландшафта
+		//Technoteam: РќРµРёСЃРїРѕР»СЊР·СѓРµРјС‹Р№ РєРѕРґ (РјСѓСЃРѕСЂ)
+		// СѓРґР°Р»РµРЅРёРµ РїСѓР»СЊ Р·Р° РІС‹Р»РµС‚ Р»Р°РЅРґС€Р°С„С‚Р°
 		/*if((iter->pos.y < this->GetOffsetTop(iter->pos.x, iter->pos.z)) || (iter->pos.x > cube) || (iter->pos.x < -cube) || (iter->pos.z > cube) || (iter->pos.z < -cube)) {
 			if (iter != plist->end()){
 				iter = plist->erase(iter);
@@ -874,14 +874,14 @@ void  xTerrain::CollisionBullet(const LPGLVECTOR3& user_pos, std::list<sBullet>*
 
 }
 	
-// Метод по проверке столкновения с пользователем(камерой) домики, враги-роботы
+// РњРµС‚РѕРґ РїРѕ РїСЂРѕРІРµСЂРєРµ СЃС‚РѕР»РєРЅРѕРІРµРЅРёСЏ СЃ РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј(РєР°РјРµСЂРѕР№) РґРѕРјРёРєРё, РІСЂР°РіРё-СЂРѕР±РѕС‚С‹
 bool  xTerrain::CollisionUser(xCamera* camera, const LPGLVECTOR3& user_size) {
 	GLVECTOR3 cpos  = camera->GetPos();
-	GLVECTOR3 scube = house_size + 0.8f;//Technoteam: Магические числа
+	GLVECTOR3 scube = house_size + 0.8f;//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 
 	cpos.z  = -cpos.z;
 
-	// столкновения пользователя с домиками
+	// СЃС‚РѕР»РєРЅРѕРІРµРЅРёСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ СЃ РґРѕРјРёРєР°РјРё
 	for(LPGLVECTOR3 hptr = houses; hptr != houses + MAX_HOUSES; ++hptr) {
 		if(IsRectIntersect(&cpos, user_size, hptr, &scube)) {
 			cpos.z           = -cpos.z;
@@ -891,7 +891,7 @@ bool  xTerrain::CollisionUser(xCamera* camera, const LPGLVECTOR3& user_size) {
 	}
 
 
-	// столкновения пользователя c летающимu роботам
+	// СЃС‚РѕР»РєРЅРѕРІРµРЅРёСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ c Р»РµС‚Р°СЋС‰РёРјu СЂРѕР±РѕС‚Р°Рј
 	for(sRobotFly* pfly = robots_fly; pfly != robots_fly + sRobotFly::MAX_ROBOTS_FLY; ++pfly) {
 		if(pfly->IsCollision(&cpos, user_size->x)) {
 			camera->StartUron(&pfly->vec, 1);
@@ -900,7 +900,7 @@ bool  xTerrain::CollisionUser(xCamera* camera, const LPGLVECTOR3& user_size) {
 	}
 
 
-	// столкновения пользователя c TM-роботам
+	// СЃС‚РѕР»РєРЅРѕРІРµРЅРёСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ c TM-СЂРѕР±РѕС‚Р°Рј
 	for(sRobotTM* ptm = robots_tm; ptm != robots_tm + sRobotTM::MAX_ROBOTS_TM; ++ptm) {
 		if(ptm->IsCollision(&cpos, user_size->x)) {
 			camera->StartUron(&ptm->vec, 2);
@@ -911,15 +911,15 @@ bool  xTerrain::CollisionUser(xCamera* camera, const LPGLVECTOR3& user_size) {
 	return  false;
 }
 
-// обработка звуковых данных
+// РѕР±СЂР°Р±РѕС‚РєР° Р·РІСѓРєРѕРІС‹С… РґР°РЅРЅС‹С…
 void  xTerrain::play_sound(const LPGLVECTOR3& va, const LPGLVECTOR3& vb, int code) {
 	GLfloat len = VectorLength(&(*vb - *va));
 	len         = ABS(len);
 
-	if(code & 1) { // урон по роботу
+	if(code & 1) { // СѓСЂРѕРЅ РїРѕ СЂРѕР±РѕС‚Сѓ
 		snd_uron->SetVolume(max(DSBVOLUME_MAX - len * 6L, DSBVOLUME_MIN));
 		snd_uron->Play();
-	} else { // обработка взрыва
+	} else { // РѕР±СЂР°Р±РѕС‚РєР° РІР·СЂС‹РІР°
 		snd_crush->Stop();
 		snd_crush->SetVolume(max(DSBVOLUME_MAX - len * 6L, DSBVOLUME_MIN));
 		snd_crush->Play();	
@@ -948,8 +948,8 @@ xSkyBox::~xSkyBox() {
 
 
 
-// Метод создаёт скайбокс(небесный куб), поместим всё творение сразу в видеопамять и не надо лишние
-// метания по видеошине из системной памяти
+// РњРµС‚РѕРґ СЃРѕР·РґР°С‘С‚ СЃРєР°Р№Р±РѕРєСЃ(РЅРµР±РµСЃРЅС‹Р№ РєСѓР±), РїРѕРјРµСЃС‚РёРј РІСЃС‘ С‚РІРѕСЂРµРЅРёРµ СЃСЂР°Р·Сѓ РІ РІРёРґРµРѕРїР°РјСЏС‚СЊ Рё РЅРµ РЅР°РґРѕ Р»РёС€РЅРёРµ
+// РјРµС‚Р°РЅРёСЏ РїРѕ РІРёРґРµРѕС€РёРЅРµ РёР· СЃРёСЃС‚РµРјРЅРѕР№ РїР°РјСЏС‚Рё
 void  xSkyBox::Create(GLfloat width, GLfloat height, GLfloat depth, GLfloat h) {
 	this->width  = width;
 	this->height = height;
@@ -957,9 +957,9 @@ void  xSkyBox::Create(GLfloat width, GLfloat height, GLfloat depth, GLfloat h) {
 
 	listid = glGenLists(5);
 	
-	//Technoteam: Повторяющийся код, желательно выделить в отдельный метод
+	//Technoteam: РџРѕРІС‚РѕСЂСЏСЋС‰РёР№СЃСЏ РєРѕРґ, Р¶РµР»Р°С‚РµР»СЊРЅРѕ РІС‹РґРµР»РёС‚СЊ РІ РѕС‚РґРµР»СЊРЅС‹Р№ РјРµС‚РѕРґ
 	glNewList(listid, GL_COMPILE);
-		glBegin(GL_TRIANGLE_STRIP);  // рисуем заднию стенку
+		glBegin(GL_TRIANGLE_STRIP);  // СЂРёСЃСѓРµРј Р·Р°РґРЅРёСЋ СЃС‚РµРЅРєСѓ
 			glTexCoord2f(0.0f, 0.0f);
 			glVertex3f(width,  height, -depth);
 			glTexCoord2f(1.0f, 0.0f);
@@ -972,7 +972,7 @@ void  xSkyBox::Create(GLfloat width, GLfloat height, GLfloat depth, GLfloat h) {
 	glEndList();
 
 	glNewList(listid + 1u, GL_COMPILE);
-		glBegin(GL_TRIANGLE_STRIP);  // рисуем переднию стенку
+		glBegin(GL_TRIANGLE_STRIP);  // СЂРёСЃСѓРµРј РїРµСЂРµРґРЅРёСЋ СЃС‚РµРЅРєСѓ
 			glTexCoord2f(0.0f, 0.0f);
 			glVertex3f(-width,  height, depth);
 			glTexCoord2f(1.0f, 0.0f);
@@ -985,7 +985,7 @@ void  xSkyBox::Create(GLfloat width, GLfloat height, GLfloat depth, GLfloat h) {
 	glEndList();
 
 	glNewList(listid + 2u, GL_COMPILE);
-		glBegin(GL_TRIANGLE_STRIP);  // рисуем левую стенку
+		glBegin(GL_TRIANGLE_STRIP);  // СЂРёСЃСѓРµРј Р»РµРІСѓСЋ СЃС‚РµРЅРєСѓ
 			glTexCoord2f(0.0f, 0.0f);
 			glVertex3f(-width,  height, -depth);
 			glTexCoord2f(1.0f, 0.0f);
@@ -998,7 +998,7 @@ void  xSkyBox::Create(GLfloat width, GLfloat height, GLfloat depth, GLfloat h) {
 	glEndList();
 
 	glNewList(listid + 3u, GL_COMPILE);
-		glBegin(GL_TRIANGLE_STRIP);  // рисуем правую стенку
+		glBegin(GL_TRIANGLE_STRIP);  // СЂРёСЃСѓРµРј РїСЂР°РІСѓСЋ СЃС‚РµРЅРєСѓ
 			glTexCoord2f(0.0f, 0.0f);
 			glVertex3f(width, height,  depth);
 			glTexCoord2f(1.0f, 0.0f);
@@ -1011,7 +1011,7 @@ void  xSkyBox::Create(GLfloat width, GLfloat height, GLfloat depth, GLfloat h) {
 	glEndList();
 
 	glNewList(listid + 4u, GL_COMPILE);
-		glBegin(GL_TRIANGLE_STRIP);  // рисуем верхнию стенку
+		glBegin(GL_TRIANGLE_STRIP);  // СЂРёСЃСѓРµРј РІРµСЂС…РЅРёСЋ СЃС‚РµРЅРєСѓ
 			glTexCoord2f(0.0f, 0.0f);
 			glVertex3f(-width,  height, -depth);
 			glTexCoord2f(1.0f, 0.0f);
@@ -1024,15 +1024,15 @@ void  xSkyBox::Create(GLfloat width, GLfloat height, GLfloat depth, GLfloat h) {
 	glEndList();
 }
 
-// Метод выводит небесный куб в сцену
+// РњРµС‚РѕРґ РІС‹РІРѕРґРёС‚ РЅРµР±РµСЃРЅС‹Р№ РєСѓР± РІ СЃС†РµРЅСѓ
 void  xSkyBox::Display(void) {
-	for(GLuint i = 0u; i < 5; i++) {//Technoteam: Магическое число
+	for(GLuint i = 0u; i < 5; i++) {//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
 		xTextura::Set(texs[i]);
 		glCallList(listid + i);
 	}
 }
 	
-// Метод загружает текстуры в видеопамять
+// РњРµС‚РѕРґ Р·Р°РіСЂСѓР¶Р°РµС‚ С‚РµРєСЃС‚СѓСЂС‹ РІ РІРёРґРµРѕРїР°РјСЏС‚СЊ
 bool  xSkyBox::Load(int index, const TCHAR* filename) {
 	
 	if(index >= MAX_TEXS)
@@ -1046,7 +1046,7 @@ bool  xSkyBox::Load(int index, const TCHAR* filename) {
 }
 
 void  xSkyBox::Destroy(void) {
-	glDeleteLists(listid, 5);//Technoteam: Магическое число
+	glDeleteLists(listid, 5);//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
 	for(GLint i = 0; i < MAX_TEXS; i++)
 		xTextura::Free(texs[i]);
 	ZeroMemory(texs, sizeof(texs));

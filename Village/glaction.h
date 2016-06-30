@@ -1,6 +1,6 @@
 /*
-	Автор(с): Санников, Кулебякин, Ступак и Пархоменко
-	Название команды: AGRAGE
+	РђРІС‚РѕСЂ(СЃ): РЎР°РЅРЅРёРєРѕРІ, РљСѓР»РµР±СЏРєРёРЅ, РЎС‚СѓРїР°Рє Рё РџР°СЂС…РѕРјРµРЅРєРѕ
+	РќР°Р·РІР°РЅРёРµ РєРѕРјР°РЅРґС‹: AGRAGE
 	e-mail:   sdk96@mail.ru
 	Checked: on the surface by arid1995
 */
@@ -11,15 +11,15 @@
 #endif
 #define  MAX_HOUSES  8
 
-//Technoteam: Структуры лучше вынести в отдельный файл
+//Technoteam: РЎС‚СЂСѓРєС‚СѓСЂС‹ Р»СѓС‡С€Рµ РІС‹РЅРµСЃС‚Рё РІ РѕС‚РґРµР»СЊРЅС‹Р№ С„Р°Р№Р»
 
-// структура для плазменной пули
+// СЃС‚СЂСѓРєС‚СѓСЂР° РґР»СЏ РїР»Р°Р·РјРµРЅРЅРѕР№ РїСѓР»Рё
 struct sBullet {
 	GLVECTOR3  pos;
 	GLVECTOR3  vec;
 };
 
-// Пользователь от первого лица
+// РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ РѕС‚ РїРµСЂРІРѕРіРѕ Р»РёС†Р°
 class  xUser {
 private:
 	xSound*    snd_uron;
@@ -66,7 +66,7 @@ public:
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-// структура для робота "марки - TM"
+// СЃС‚СЂСѓРєС‚СѓСЂР° РґР»СЏ СЂРѕР±РѕС‚Р° "РјР°СЂРєРё - TM"
 struct  sRobotTM {
 	GLVECTOR3 pos;
 	GLVECTOR3 vec;
@@ -95,7 +95,7 @@ struct  sRobotTM {
 	}
 	
 
-	// инициализация
+	// РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ
 	void  Initialize(const LPGLVECTOR3& user_pos, GLfloat x, GLfloat z) {
 		pos.x        = x;
 		pos.z        = z;
@@ -128,7 +128,7 @@ struct  sRobotTM {
 		snd_move->SetVolume(DSBVOLUME_MIN);
 	}
 
-	// всякие полезные действия по анимации-движения
+	// РІСЃСЏРєРёРµ РїРѕР»РµР·РЅС‹Рµ РґРµР№СЃС‚РІРёСЏ РїРѕ Р°РЅРёРјР°С†РёРё-РґРІРёР¶РµРЅРёСЏ
 	void  UpdateMove(const LPGLVECTOR3& user_pos, GLfloat cube, GLfloat felapsed, GLfloat ftime) {
 	
 		if(crush)
@@ -154,38 +154,38 @@ struct  sRobotTM {
 				return;
 			}
 			
-			// если в радиусе пользователь окажется взять направление на него
-			if(IsCollisionSphere(&pos, 25.0f, user_pos, 25.0f))//Technoteam: Магические числа
+			// РµСЃР»Рё РІ СЂР°РґРёСѓСЃРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РѕРєР°Р¶РµС‚СЃСЏ РІР·СЏС‚СЊ РЅР°РїСЂР°РІР»РµРЅРёРµ РЅР° РЅРµРіРѕ
+			if(IsCollisionSphere(&pos, 25.0f, user_pos, 25.0f))//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 				primary_task = 0;
 		}
-		angle -= fNUM(felapsed, 290.0f);//Technoteam: Магические числа
+		angle -= fNUM(felapsed, 290.0f);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 
-		// через каждую секунду регулировка грмоксоти звка на расстояние между пользователем
-		if((ftime - time_sound) > 1000.0f) {//Technoteam: Магические числа
+		// С‡РµСЂРµР· РєР°Р¶РґСѓСЋ СЃРµРєСѓРЅРґСѓ СЂРµРіСѓР»РёСЂРѕРІРєР° РіСЂРјРѕРєСЃРѕС‚Рё Р·РІРєР° РЅР° СЂР°СЃСЃС‚РѕСЏРЅРёРµ РјРµР¶РґСѓ РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј
+		if((ftime - time_sound) > 1000.0f) {//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 			time_sound = ftime;
-			this->volume_ctrl(user_pos);//Technoteam: Неоправданный this
+			this->volume_ctrl(user_pos);//Technoteam: РќРµРѕРїСЂР°РІРґР°РЅРЅС‹Р№ this
 		}
 
 	}
 
-	// вывод дыма и взрыва
+	// РІС‹РІРѕРґ РґС‹РјР° Рё РІР·СЂС‹РІР°
 	void  DisplayEffect(const LPGLVECTOR3& user_pos, GLuint tex, GLfloat angleY, GLfloat felapsed, GLfloat ftime) {
 		
 		GLVECTOR3 vpos;
 
-		if(uron) {  // обработка урона
+		if(uron) {  // РѕР±СЂР°Р±РѕС‚РєР° СѓСЂРѕРЅР°
 			xTextura::Set(tex);
-			fsmoke -= fNUM(felapsed, 1.4f);//Technoteam: Магические числа
-			xModel::DrawRect(&GLVECTOR3(pos.x, pos.y + 5.5f, pos.z), fRAND(5, 9), angleY); //Technoteam: Магические числа
+			fsmoke -= fNUM(felapsed, 1.4f);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
+			xModel::DrawRect(&GLVECTOR3(pos.x, pos.y + 5.5f, pos.z), fRAND(5, 9), angleY); //Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 			if(fsmoke < 0.1f)
 				uron = FALSE;
 		}
 
 
-		if(crush) { // обработка взрыва
+		if(crush) { // РѕР±СЂР°Р±РѕС‚РєР° РІР·СЂС‹РІР°
 			const GLfloat cadr = 1.0f / 3.0f;
 
-			if((ftime - time_crush) > 70.0f) {//Technoteam: Магическое число
+			if((ftime - time_crush) > 70.0f) {//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
 				time_crush = ftime;
 				cadrs.x   += cadr;
 				if(cadrs.x >= 1.0f) {
@@ -195,21 +195,21 @@ struct  sRobotTM {
 						cadrs = 0.0f;
 						crush = FALSE;
 						
-						GLfloat rex = -500 + 10.0f;//Technoteam: Магические числа
-						GLfloat rez = -500 + fRAND(0, (int)500 * 2);//Technoteam: Магические числа
+						GLfloat rex = -500 + 10.0f;//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
+						GLfloat rez = -500 + fRAND(0, (int)500 * 2);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 					
 						if((rand() % 2) != 0) {
-							rex =  500 - 10.0f;//Technoteam: Магические числа
-							rez = -255 + fRAND(1, (int)500);//Technoteam: Магические числа
+							rex =  500 - 10.0f;//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
+							rez = -255 + fRAND(1, (int)500);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 						}
 
-						this->Initialize(user_pos, rex, rez);//Technoteam: Неоправданный this
+						this->Initialize(user_pos, rex, rez);//Technoteam: РќРµРѕРїСЂР°РІРґР°РЅРЅС‹Р№ this
 						return;
 					}
 				}
 			}
 			xTextura::Set(tex);
-			xModel::DrawAnimationSprite(&GLVECTOR3(pos.x, pos.y + 5.5f, pos.z), &GLVECTOR3(8.0f, 8.0f, 0.0f), angleY, &cadrs, &GLVECTOR2(cadr));//Technoteam: Магические числа 
+			xModel::DrawAnimationSprite(&GLVECTOR3(pos.x, pos.y + 5.5f, pos.z), &GLVECTOR3(8.0f, 8.0f, 0.0f), angleY, &cadrs, &GLVECTOR2(cadr));//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р° 
 		}
 
 	}
@@ -225,13 +225,13 @@ struct  sRobotTM {
 	}
 
 
-	// проверка столкновения с пользовательской пулей
+	// РїСЂРѕРІРµСЂРєР° СЃС‚РѕР»РєРЅРѕРІРµРЅРёСЏ СЃ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРѕР№ РїСѓР»РµР№
 	int  IsCollision(const LPGLVECTOR3& vpos, GLfloat radius) {
 		
 		if(crush)
 			return 0;
 		
-		if(IsCollisionSphere(&GLVECTOR3(pos.x, pos.y + 4.0f, pos.z), 3.3f, vpos, radius)) {//Technoteam: Магические числа
+		if(IsCollisionSphere(&GLVECTOR3(pos.x, pos.y + 4.0f, pos.z), 3.3f, vpos, radius)) {//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 			primary_task = 0;
 			if(--life > 0) {
 				uron    = TRUE;
@@ -259,13 +259,13 @@ struct  sRobotTM {
 	void  volume_ctrl(const LPGLVECTOR3& user_pos) {
 		GLfloat len = VectorLength(&(*user_pos - pos));
 		len         = ABS(len);
-		if(len <= 150.0f)//Technoteam: Магическое число
+		if(len <= 150.0f)//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
 			snd_move->SetVolume(max(DSBVOLUME_MAX - len * 6L, DSBVOLUME_MIN));
 	}
 	
 };
 
-// структура для летающего робота
+// СЃС‚СЂСѓРєС‚СѓСЂР° РґР»СЏ Р»РµС‚Р°СЋС‰РµРіРѕ СЂРѕР±РѕС‚Р°
 struct  sRobotFly {
 	GLVECTOR3 pos;
 	GLVECTOR3 vec;
@@ -279,23 +279,23 @@ struct  sRobotFly {
 	GLfloat   time_crush;
 
 	enum  {
-		TASK_PUSH  = 0x1,  // задание скинуть бомбу на пользователя любой ценой
-		TASK_MOVE  = 0x2   // цель полёта выбирается во время инициализации
+		TASK_PUSH  = 0x1,  // Р·Р°РґР°РЅРёРµ СЃРєРёРЅСѓС‚СЊ Р±РѕРјР±Сѓ РЅР° РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ Р»СЋР±РѕР№ С†РµРЅРѕР№
+		TASK_MOVE  = 0x2   // С†РµР»СЊ РїРѕР»С‘С‚Р° РІС‹Р±РёСЂР°РµС‚СЃСЏ РІРѕ РІСЂРµРјСЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё
 	};
 	int       task;
 
-	static const int MAX_ROBOTS_FLY; // кол-во роботов в сцене
+	static const int MAX_ROBOTS_FLY; // РєРѕР»-РІРѕ СЂРѕР±РѕС‚РѕРІ РІ СЃС†РµРЅРµ
 
 	sRobotFly(void): task(TASK_PUSH) {}
 	sRobotFly(const LPGLVECTOR3& user_pos, GLfloat x, GLfloat z) {
 		this->Initialize(user_pos, x, z);
 	}
 
-	//Technoteam: Определение методов внутри класса/структуры
-	// инициализация
+	//Technoteam: РћРїСЂРµРґРµР»РµРЅРёРµ РјРµС‚РѕРґРѕРІ РІРЅСѓС‚СЂРё РєР»Р°СЃСЃР°/СЃС‚СЂСѓРєС‚СѓСЂС‹
+	// РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ
 	void  Initialize(const LPGLVECTOR3& user_pos, GLfloat x, GLfloat z) {
 		pos.x  = x;
-		pos.y  = 90.0f + fRAND(1, 21);//Technoteam: Магические числа
+		pos.y  = 90.0f + fRAND(1, 21);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 		pos.z  = z;
 		life   = 7;
 		fangle = 0.0f;
@@ -308,29 +308,29 @@ struct  sRobotFly {
 			VectorSubtract(&vec, &pos, user_pos);
 			rotY   = atan2f(vec.x, vec.z) * 180.0f / GL_PI;
 			VectorNormalize(&vec);
-			vec   *= 0.9f;//Technoteam: Магическое число
+			vec   *= 0.9f;//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
 			vec.y  = 0.0f;
 		}
 	}
 
-	// всякие полезные действия
+	// РІСЃСЏРєРёРµ РїРѕР»РµР·РЅС‹Рµ РґРµР№СЃС‚РІРёСЏ
 	void  UpdateMove(const LPGLVECTOR3& user_pos, GLfloat cube, GLfloat felapsed, GLfloat ftime) {
 		
 		if(crush)
 			return;
 
-		if(task & TASK_PUSH) { // полёт с тараном
+		if(task & TASK_PUSH) { // РїРѕР»С‘С‚ СЃ С‚Р°СЂР°РЅРѕРј
 
 			VectorSubtract(&vec, &pos, user_pos);
 			rotY   = fDEGREE(atan2f(vec.x, vec.z));
 			VectorNormalize(&vec);
-			vec   *= 0.9f;//Technoteam: Магическое число
-			pos   -= vec * fNUM(felapsed, 24.0f);//Technoteam: Магическое число
+			vec   *= 0.9f;//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
+			pos   -= vec * fNUM(felapsed, 24.0f);//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
 
-		} else if(task & TASK_MOVE) {  // простой полёт
+		} else if(task & TASK_MOVE) {  // РїСЂРѕСЃС‚РѕР№ РїРѕР»С‘С‚
 
-			pos   -= vec * fNUM(felapsed, 24.0f);//Technoteam: Магическое число
-			if((pos.x > cube) || (pos.x < -cube) || (pos.z > cube) || (pos.z < -cube)) { // всё улутели за край мира(skybox) с генерировать новую позицию-задачу
+			pos   -= vec * fNUM(felapsed, 24.0f);//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
+			if((pos.x > cube) || (pos.x < -cube) || (pos.z > cube) || (pos.z < -cube)) { // РІСЃС‘ СѓР»СѓС‚РµР»Рё Р·Р° РєСЂР°Р№ РјРёСЂР°(skybox) СЃ РіРµРЅРµСЂРёСЂРѕРІР°С‚СЊ РЅРѕРІСѓСЋ РїРѕР·РёС†РёСЋ-Р·Р°РґР°С‡Сѓ
 				
 				GLfloat rex = -cube + 10.0f;
 				GLfloat rez = -cube + fRAND(0, (int)cube * 2);
@@ -346,24 +346,24 @@ struct  sRobotFly {
 		fangle += fNUM(felapsed, 8.0f);
 	}
 
-	// вывод дыма и взрыва
+	// РІС‹РІРѕРґ РґС‹РјР° Рё РІР·СЂС‹РІР°
 	void  DisplayEffect(const LPGLVECTOR3& user_pos, GLuint tex, GLfloat angleY, GLfloat felapsed, GLfloat ftime) {
 		
 		GLVECTOR3 vpos;
 
-		if(uron) {  // обработка урона
+		if(uron) {  // РѕР±СЂР°Р±РѕС‚РєР° СѓСЂРѕРЅР°
 			xTextura::Set(tex);
-			fsmoke -= fNUM(felapsed, 1.4f);//Technoteam: Магическое число
+			fsmoke -= fNUM(felapsed, 1.4f);//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
 			xModel::DrawRect(&pos, fRAND(5, 9), angleY); 
 			if(fsmoke < 0.1f)
 				uron = FALSE;
 		}
 
 
-		if(crush) { // обработка взрыва
+		if(crush) { // РѕР±СЂР°Р±РѕС‚РєР° РІР·СЂС‹РІР°
 			const GLfloat cadr = 1.0f / 3.0f;
 
-			if((ftime - time_crush) > 70.0f) {//Technoteam: Магическое число
+			if((ftime - time_crush) > 70.0f) {//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
 				time_crush = ftime;
 				cadrs.x   += cadr;
 				if(cadrs.x >= 1.0f) {
@@ -373,12 +373,12 @@ struct  sRobotFly {
 						cadrs = 0.0f;
 						crush = FALSE;
 						
-						GLfloat rex = -500 + 10.0f;//Technoteam: Магическое число
-						GLfloat rez = -500 + fRAND(0, (int)500 * 2);//Technoteam: Магическое число
+						GLfloat rex = -500 + 10.0f;//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
+						GLfloat rez = -500 + fRAND(0, (int)500 * 2);//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
 					
 						if((rand() % 2) != 0) {
-							rex =  500 - 10.0f;//Technoteam: Магические число
-							rez = -255 + fRAND(1, (int)500);//Technoteam: Магическое число
+							rex =  500 - 10.0f;//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Рѕ
+							rez = -255 + fRAND(1, (int)500);//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
 						}
 
 						this->Initialize(user_pos, rex, rez);
@@ -393,7 +393,7 @@ struct  sRobotFly {
 	}
 
 
-	// проверка текущей операции
+	// РїСЂРѕРІРµСЂРєР° С‚РµРєСѓС‰РµР№ РѕРїРµСЂР°С†РёРё
 	int  IsTaskPush(void) const {
 		return (task & TASK_PUSH);
 	}
@@ -409,7 +409,7 @@ struct  sRobotFly {
 	}
 
 
-	// проверка столкновения с пользовательской пулей
+	// РїСЂРѕРІРµСЂРєР° СЃС‚РѕР»РєРЅРѕРІРµРЅРёСЏ СЃ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРѕР№ РїСѓР»РµР№
 	int  IsCollision(const LPGLVECTOR3& vpos, GLfloat radius) {
 		
 		if(crush)
@@ -432,11 +432,11 @@ struct  sRobotFly {
 	}
 };
 
-//Technoteam: Жеалательно делать один класс в одном файле
-// Класс-карта высот, загружает карту из файла .RAW
+//Technoteam: Р–РµР°Р»Р°С‚РµР»СЊРЅРѕ РґРµР»Р°С‚СЊ РѕРґРёРЅ РєР»Р°СЃСЃ РІ РѕРґРЅРѕРј С„Р°Р№Р»Рµ
+// РљР»Р°СЃСЃ-РєР°СЂС‚Р° РІС‹СЃРѕС‚, Р·Р°РіСЂСѓР¶Р°РµС‚ РєР°СЂС‚Сѓ РёР· С„Р°Р№Р»Р° .RAW
 class  xTerrain {
 
-	// структура для растительности дерево
+	// СЃС‚СЂСѓРєС‚СѓСЂР° РґР»СЏ СЂР°СЃС‚РёС‚РµР»СЊРЅРѕСЃС‚Рё РґРµСЂРµРІРѕ
 	struct  sTree {
 		GLfloat x, y, z;
 		GLuint  type;
@@ -474,7 +474,7 @@ private:
 	xSound*   snd_move[2];
 
 
-	std::vector<sTree> trees;  // растительность кусты, деревья.
+	std::vector<sTree> trees;  // СЂР°СЃС‚РёС‚РµР»СЊРЅРѕСЃС‚СЊ РєСѓСЃС‚С‹, РґРµСЂРµРІСЊСЏ.
 	GLVECTOR3          houses[MAX_HOUSES];
 	GLVECTOR3          house_size;
 	int                size_house;
@@ -482,8 +482,8 @@ private:
 
 	xRobotFly          robot_fly;
 	xRobotTM           robot_tm;
-	sRobotFly          robots_fly[2];  // 2 - летающего робота на этом хватит
-	sRobotTM           robots_tm[2];   // 2 - катающих по земле робота
+	sRobotFly          robots_fly[2];  // 2 - Р»РµС‚Р°СЋС‰РµРіРѕ СЂРѕР±РѕС‚Р° РЅР° СЌС‚РѕРј С…РІР°С‚РёС‚
+	sRobotTM           robots_tm[2];   // 2 - РєР°С‚Р°СЋС‰РёС… РїРѕ Р·РµРјР»Рµ СЂРѕР±РѕС‚Р°
 public:
 	xTerrain(void);
 	~xTerrain();
@@ -541,7 +541,7 @@ private:
 
 
 
-// класс небесного куба
+// РєР»Р°СЃСЃ РЅРµР±РµСЃРЅРѕРіРѕ РєСѓР±Р°
 class xSkyBox {
 private:
 	enum { MAX_TEXS = 5 };

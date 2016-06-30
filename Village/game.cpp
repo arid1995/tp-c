@@ -1,6 +1,6 @@
 /*
-	Автор(с): Санников, Кулебякин, Ступак и Пархоменко
-	Название команды: AGRAGE
+	РђРІС‚РѕСЂ(СЃ): РЎР°РЅРЅРёРєРѕРІ, РљСѓР»РµР±СЏРєРёРЅ, РЎС‚СѓРїР°Рє Рё РџР°СЂС…РѕРјРµРЅРєРѕ
+	РќР°Р·РІР°РЅРёРµ РєРѕРјР°РЅРґС‹: AGRAGE
 	e-mail:   sdk96@mail.ru
 	Checked: on the surface by arid1995
 */
@@ -23,71 +23,71 @@ xGame::~xGame() {
 void  xGame::OnCreate(HDC hDC, HWND hwnd) {
 
 	user    = new xUser(Sound());
-	terrain = new xTerrain();  //карта высот
-	terrain->LoadTextura(_T("image\\terrain\\floor.jpg")); //загружаем пол
+	terrain = new xTerrain();  //РєР°СЂС‚Р° РІС‹СЃРѕС‚
+	terrain->LoadTextura(_T("image\\terrain\\floor.jpg")); //Р·Р°РіСЂСѓР¶Р°РµРј РїРѕР»
 	terrain->Create(Sound(), 1024, 16);
 	terrain->LoadTerrain(_T("image\\terrain\\map.raw"), 0.3f); // 0.3f	
-	//загружаем карту высот из map.raw
+	//Р·Р°РіСЂСѓР¶Р°РµРј РєР°СЂС‚Сѓ РІС‹СЃРѕС‚ РёР· map.raw
 
-	skybox.Create(500.0f, 180.0f, 500.0f, -1.0f); //создаем небо //Technoteam: Магические числа
-	skybox.Load(0, _T("image\\skybox\\back.jpg")); //загружаем небо со всех сторон
+	skybox.Create(500.0f, 180.0f, 500.0f, -1.0f); //СЃРѕР·РґР°РµРј РЅРµР±Рѕ //Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
+	skybox.Load(0, _T("image\\skybox\\back.jpg")); //Р·Р°РіСЂСѓР¶Р°РµРј РЅРµР±Рѕ СЃРѕ РІСЃРµС… СЃС‚РѕСЂРѕРЅ
 	skybox.Load(1, _T("image\\skybox\\front.jpg"));
 	skybox.Load(2, _T("image\\skybox\\left.jpg"));
 	skybox.Load(3, _T("image\\skybox\\right.jpg"));
 	skybox.Load(4, _T("image\\skybox\\top.jpg"));
 
-	tex_digits = xTextura::OpenImageTGA(_T("image\\digits.tga")); //цифры
-	tex_alpha  = xTextura::OpenImageTGA(_T("image\\alpha.tga")); //буквы
-	tex_life   = xTextura::OpenImageTGA(_T("image\\life.tga")); //значок жизней
-	tex_cursor = xTextura::OpenImageTGA(_T("image\\cursor.tga"));  //курсор
+	tex_digits = xTextura::OpenImageTGA(_T("image\\digits.tga")); //С†РёС„СЂС‹
+	tex_alpha  = xTextura::OpenImageTGA(_T("image\\alpha.tga")); //Р±СѓРєРІС‹
+	tex_life   = xTextura::OpenImageTGA(_T("image\\life.tga")); //Р·РЅР°С‡РѕРє Р¶РёР·РЅРµР№
+	tex_cursor = xTextura::OpenImageTGA(_T("image\\cursor.tga"));  //РєСѓСЂСЃРѕСЂ
 
-	light_pos = GLVECTOR4(140.0f, 100.0f, -60.0f, 0.0f);//Technoteam: Магические числа
+	light_pos = GLVECTOR4(140.0f, 100.0f, -60.0f, 0.0f);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 	
-	//создаем источники света
+	//СЃРѕР·РґР°РµРј РёСЃС‚РѕС‡РЅРёРєРё СЃРІРµС‚Р°
 	xEffect::SetLight(&GLCOLOR(1.0f, 1.0f, 1.0f, 1.0f), 
 					  &GLCOLOR(1.0f, 1.0f, 1.0f, 1.0f),
-					  &GLCOLOR(0.4f, 0.4f, 0.4f, 1.0f));//Technoteam: Магические числа  
+					  &GLCOLOR(0.4f, 0.4f, 0.4f, 1.0f));//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°  
 
-	//задаем позицию источников света
+	//Р·Р°РґР°РµРј РїРѕР·РёС†РёСЋ РёСЃС‚РѕС‡РЅРёРєРѕРІ СЃРІРµС‚Р°
 	terrain->SetLightPos(&light_pos);
 
-	//инициализируем камеру
+	//РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј РєР°РјРµСЂСѓ
 	camera.Initialize(GLVECTOR3(160.0f, 3.9f, 0.0f), -45.0f); 
 
-	// кнопки только для меню и конца игры
-	buttons[0] = sButton(1, _T("НАЧАТЬ ИГРАТЬ"), Screen().cx / 2 - 140, Screen().cy / 2 + 100, 280, 60,   RGB(30, 100, 255), RGB(230, 100, 155));//Technoteam: Магические числа
-	buttons[1] = sButton(2, _T("ВЫЙТИ ИЗ ИГРЫ"), Screen().cx / 2 - 140, Screen().cy / 2 + 190, 280, 60, RGB(30, 100, 255), RGB(230, 100, 155));//Technoteam: Магические числа
+	// РєРЅРѕРїРєРё С‚РѕР»СЊРєРѕ РґР»СЏ РјРµРЅСЋ Рё РєРѕРЅС†Р° РёРіСЂС‹
+	buttons[0] = sButton(1, _T("РќРђР§РђРўР¬ РР“Р РђРўР¬"), Screen().cx / 2 - 140, Screen().cy / 2 + 100, 280, 60,   RGB(30, 100, 255), RGB(230, 100, 155));//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
+	buttons[1] = sButton(2, _T("Р’Р«Р™РўР РР— РР“Р Р«"), Screen().cx / 2 - 140, Screen().cy / 2 + 190, 280, 60, RGB(30, 100, 255), RGB(230, 100, 155));//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 
 	state_game = GAME_MENU;
 
-	//камера и меню  
+	//РєР°РјРµСЂР° Рё РјРµРЅСЋ  
 	camera.CinematicMenu(TRUE);   
 }
 
 void  xGame::Initialize(void) {
 
-	//автоматический камеро-обзор
+	//Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРёР№ РєР°РјРµСЂРѕ-РѕР±Р·РѕСЂ
 	camera.CinematicMenu(FALSE); 
 
-	//задаем начальную позицию
-	camera.Initialize(GLVECTOR3(160.0f, 3.9f, 0.0f), -45.0f);//Technoteam: Магические числа
+	//Р·Р°РґР°РµРј РЅР°С‡Р°Р»СЊРЅСѓСЋ РїРѕР·РёС†РёСЋ
+	camera.Initialize(GLVECTOR3(160.0f, 3.9f, 0.0f), -45.0f);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 
-	//начальные настройки игрока
+	//РЅР°С‡Р°Р»СЊРЅС‹Рµ РЅР°СЃС‚СЂРѕР№РєРё РёРіСЂРѕРєР°
 	user->Initialize();  
 	terrain->SetLightPos(&light_pos);
 	terrain->OffsetCameraY(&camera.GetPos());
 	terrain->Initialize(&GLVECTOR3(camera.GetPos().x, camera.GetPos().y, -camera.GetPos().z));
 }
 
-// Вот здесь, само величество магия процесса рисования
+// Р’РѕС‚ Р·РґРµСЃСЊ, СЃР°РјРѕ РІРµР»РёС‡РµСЃС‚РІРѕ РјР°РіРёСЏ РїСЂРѕС†РµСЃСЃР° СЂРёСЃРѕРІР°РЅРёСЏ
 void  xGame::OnRender(void) {
 
 	if(state_game & GAME_START) {
 
-		// включить текстуирование
+		// РІРєР»СЋС‡РёС‚СЊ С‚РµРєСЃС‚СѓРёСЂРѕРІР°РЅРёРµ
 		xTextura::Enabled(GL_TRUE);	
 
-		// включить освещение
+		// РІРєР»СЋС‡РёС‚СЊ РѕСЃРІРµС‰РµРЅРёРµ
 		xEffect::BeginLight();   
 		xEffect::LightPos(&light_pos);
 		user->Display(fElapsed(), fTime());
@@ -95,16 +95,16 @@ void  xGame::OnRender(void) {
 
 		camera.UpdateMove();
 
-		// включить отсечение против часовой стрелки
+		// РІРєР»СЋС‡РёС‚СЊ РѕС‚СЃРµС‡РµРЅРёРµ РїСЂРѕС‚РёРІ С‡Р°СЃРѕРІРѕР№ СЃС‚СЂРµР»РєРё
 		xEffect::ModeCull(GL_CCW); 
 
-		////////////////////// вывод ландшафта и его объектов
+		////////////////////// РІС‹РІРѕРґ Р»Р°РЅРґС€Р°С„С‚Р° Рё РµРіРѕ РѕР±СЉРµРєС‚РѕРІ
 		terrain->BeginMatrix(&GLVECTOR3(0.0f, 0.0f, 0.0f));
 
-		//показать небо
+		//РїРѕРєР°Р·Р°С‚СЊ РЅРµР±Рѕ
 		skybox.Display(); 
 
-		// включить освещение
+		// РІРєР»СЋС‡РёС‚СЊ РѕСЃРІРµС‰РµРЅРёРµ
 		xEffect::BeginLight();   
 		xEffect::LightPos(&light_pos);
 
@@ -116,77 +116,77 @@ void  xGame::OnRender(void) {
 
 		
 		GLVECTOR3 puser = GLVECTOR3(camera.GetPos().x, camera.GetPos().y, -camera.GetPos().z);
-		// вывод роботов
+		// РІС‹РІРѕРґ СЂРѕР±РѕС‚РѕРІ
 		terrain->DisplayRobots(&puser, fElapsed(), fTime());
-		// конец вывода
+		// РєРѕРЅРµС† РІС‹РІРѕРґР°
 
-		// отключить освещение сцены
+		// РѕС‚РєР»СЋС‡РёС‚СЊ РѕСЃРІРµС‰РµРЅРёРµ СЃС†РµРЅС‹
 		xEffect::EndLight();  
 
-		// вывод деревьев
-		xEffect::ModeClip(0.4f);//Technoteam: Магическое числа
+		// РІС‹РІРѕРґ РґРµСЂРµРІСЊРµРІ
+		xEffect::ModeClip(0.4f);//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Р°
 		terrain->DisplayVegetations(&puser, -camera.GetYaw(), fTime(), fElapsed());
 		xEffect::EndClip();
 
-		// отключить текстуирование
+		// РѕС‚РєР»СЋС‡РёС‚СЊ С‚РµРєСЃС‚СѓРёСЂРѕРІР°РЅРёРµ
 		xTextura::Enabled(GL_FALSE); 
 
 
-		////////вывод теней//////////
+		////////РІС‹РІРѕРґ С‚РµРЅРµР№//////////
 		xEffect::ModeStencil();
 		terrain->DisplayShadow();
 		terrain->DisplayShadowRobots(&light_pos);
-		xEffect::EndStencil(&GLCOLOR(0.0f, 0.0f, 0.0f, 0.3f));//Technoteam: Магическое число
+		xEffect::EndStencil(&GLCOLOR(0.0f, 0.0f, 0.0f, 0.3f));//Technoteam: РњР°РіРёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ
 		//////////////////////////////
 
-		// включить текстуирование
+		// РІРєР»СЋС‡РёС‚СЊ С‚РµРєСЃС‚СѓРёСЂРѕРІР°РЅРёРµ
 		xTextura::Enabled(GL_TRUE); 
 
 
-		// включить альфа смешивание(blend)
+		// РІРєР»СЋС‡РёС‚СЊ Р°Р»СЊС„Р° СЃРјРµС€РёРІР°РЅРёРµ(blend)
 		xEffect::ModeAlpha(&GLCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 		terrain->DisplayEffectRobots(&puser, -camera.GetYaw(), fElapsed(), fTime());
 		user->DisplayLazer(fElapsed(), fTime(), -camera.GetYaw());
 		xEffect::EndAlpha();
 
-		// включить 2D
+		// РІРєР»СЋС‡РёС‚СЊ 2D
 		this->Begin2D();
 		user->DisplayCross(&Screen());
 		
 		xEffect::ModeClip(0.6f); 
 
-		//рисуем жизни
-		xRect2D::DrawRectTex(tex_life, 5, 5, 32, 32);//Technoteam: Магические числа
+		//СЂРёСЃСѓРµРј Р¶РёР·РЅРё
+		xRect2D::DrawRectTex(tex_life, 5, 5, 32, 32);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 
-		//вывод цифр
-		xFont::DisplayFontInt(tex_digits, user->GetLife(), 38, 7, 15, 24, &GLVECTOR2(4.0f, 3.0f));//Technoteam: Магические числа
+		//РІС‹РІРѕРґ С†РёС„СЂ
+		xFont::DisplayFontInt(tex_digits, user->GetLife(), 38, 7, 15, 24, &GLVECTOR2(4.0f, 3.0f));//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 		xEffect::EndClip();
 		this->End2D();
 	
-		// отключить 2D
+		// РѕС‚РєР»СЋС‡РёС‚СЊ 2D
 
-		// отключить отсечение back-faces
+		// РѕС‚РєР»СЋС‡РёС‚СЊ РѕС‚СЃРµС‡РµРЅРёРµ back-faces
 		xEffect::EndCull(); 
 		
 
-		// столкновения
-		//обновление столкновений
+		// СЃС‚РѕР»РєРЅРѕРІРµРЅРёСЏ
+		//РѕР±РЅРѕРІР»РµРЅРёРµ СЃС‚РѕР»РєРЅРѕРІРµРЅРёР№
 		camera.UpdateMove(fElapsed(), fTime()); 
 		terrain->CollisionBullet(&puser, user->Bullets());
 		if(terrain->CollisionUser(&camera, &user->Size())) {
 			// sound
 			user->DecLife();
 
-			//всё пользователь проиграл GAME OVER
+			//РІСЃС‘ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РїСЂРѕРёРіСЂР°Р» GAME OVER
 			if(user->GetLife() < 0)	
 				state_game = GAME_OVER;
 		}
 
-		// перемещение камерой
-		//поворот камеры
+		// РїРµСЂРµРјРµС‰РµРЅРёРµ РєР°РјРµСЂРѕР№
+		//РїРѕРІРѕСЂРѕС‚ РєР°РјРµСЂС‹
 		camera.MouseMove(NULL, fElapsed()); 
 
-		//перемещение вперед - назад
+		//РїРµСЂРµРјРµС‰РµРЅРёРµ РІРїРµСЂРµРґ - РЅР°Р·Р°Рґ
 		if(camera.KeyMove(fElapsed(), terrain->CubeSize())) { 
 			terrain->OffsetCameraY(&camera.GetPos());
 			user->SetMove(TRUE);
@@ -194,7 +194,7 @@ void  xGame::OnRender(void) {
 			user->SetMove(FALSE);
 
 			
-		// выход из игры в любое время
+		// РІС‹С…РѕРґ РёР· РёРіСЂС‹ РІ Р»СЋР±РѕРµ РІСЂРµРјСЏ
 		if(GetAsyncKeyState(VK_ESCAPE) & 0x8000) {
 			state_game = GAME_QUIT;
 			SendMessage(Handle(), WM_DESTROY, 0, 0);
@@ -208,14 +208,14 @@ void  xGame::OnRender(void) {
 
 /*
 	if(glGetError() != GL_NO_ERROR)
-		logPrint("ошибка");*/
+		logPrint("РѕС€РёР±РєР°");*/
 }
 
-// Событие возникает при щелчке кнопки-мыши
+// РЎРѕР±С‹С‚РёРµ РІРѕР·РЅРёРєР°РµС‚ РїСЂРё С‰РµР»С‡РєРµ РєРЅРѕРїРєРё-РјС‹С€Рё
 void  xGame::OnMouseDown(WPARAM wParam, int x, int y) {
 	if (state_game & GAME_START)
 
-		//метод выпускает плазменный пучок из бластера
+		//РјРµС‚РѕРґ РІС‹РїСѓСЃРєР°РµС‚ РїР»Р°Р·РјРµРЅРЅС‹Р№ РїСѓС‡РѕРє РёР· Р±Р»Р°СЃС‚РµСЂР°
 		user->OnFire(wParam, &camera.GetPos(), fElapsed(), camera.GetYaw(), camera.GetPitch());
 	else if(state_game & GAME_MENU) {
 		POINT pt  = { x, y };
@@ -226,18 +226,18 @@ void  xGame::OnMouseDown(WPARAM wParam, int x, int y) {
 					state_game = GAME_START;
 					this->Initialize();
 
-					//включаем музыку в начале игры
+					//РІРєР»СЋС‡Р°РµРј РјСѓР·С‹РєСѓ РІ РЅР°С‡Р°Р»Рµ РёРіСЂС‹
 					sndPlaySound(_T("sound\\music.wav"), SND_FILENAME | SND_ASYNC | SND_LOOP);  
 
-					//синхронизация с музыкой
+					//СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёСЏ СЃ РјСѓР·С‹РєРѕР№
 					Sleep(500uL);
 					break;
 				} else {
 
-					//завершение игры
+					//Р·Р°РІРµСЂС€РµРЅРёРµ РёРіСЂС‹
 					state_game = GAME_QUIT;
 
-					//отправляем сообщение о закрытии окна
+					//РѕС‚РїСЂР°РІР»СЏРµРј СЃРѕРѕР±С‰РµРЅРёРµ Рѕ Р·Р°РєСЂС‹С‚РёРё РѕРєРЅР°
 					SendMessage(Handle(), WM_DESTROY, 0, 0);
 					break;
 				}
@@ -247,7 +247,7 @@ void  xGame::OnMouseDown(WPARAM wParam, int x, int y) {
 }
 	
 	
-//очитска памяти на конец игры
+//РѕС‡РёС‚СЃРєР° РїР°РјСЏС‚Рё РЅР° РєРѕРЅРµС† РёРіСЂС‹
 void  xGame::OnDestroy(void) {
 	xTextura::Free(tex_digits);
 	xTextura::Free(tex_alpha);
@@ -258,19 +258,19 @@ void  xGame::OnDestroy(void) {
 	skybox.Destroy();
 }
 
-// метод рисует диалог меню
+// РјРµС‚РѕРґ СЂРёСЃСѓРµС‚ РґРёР°Р»РѕРі РјРµРЅСЋ
 void  xGame::DrawMenu(void) {
 
-	const TCHAR* descgame = _T("УПРАВЛЕНИЕ В ИГРЕ КАК В ОБЫЧНЫХ ШУТЕРАХ");
+	const TCHAR* descgame = _T("РЈРџР РђР’Р›Р•РќРР• Р’ РР“Р Р• РљРђРљ Р’ РћР‘Р«Р§РќР«РҐ РЁРЈРўР•Р РђРҐ");
 
 	POINT pt;
 	GetCursorPos(&pt);
 	ScreenToClient(Handle(), &pt);
 
-	// включить текстуирование
+	// РІРєР»СЋС‡РёС‚СЊ С‚РµРєСЃС‚СѓРёСЂРѕРІР°РЅРёРµ
 	xTextura::Enabled(GL_TRUE);	
 
-	glColor4f(0.4f, 0.4f, 0.9f, 1.0f);//Technoteam: Магические числа
+	glColor4f(0.4f, 0.4f, 0.9f, 1.0f);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 
 	camera.UpdateMove();
 
@@ -289,8 +289,8 @@ void  xGame::DrawMenu(void) {
 
 	xEffect::EndLight();
 
-	// вывод деревьев
-	xEffect::ModeClip(0.4f);//Technoteam: Магические числа
+	// РІС‹РІРѕРґ РґРµСЂРµРІСЊРµРІ
+	xEffect::ModeClip(0.4f);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 	GLVECTOR3 puser = GLVECTOR3(camera.GetPos().x, camera.GetPos().y, -camera.GetPos().z);
 	terrain->DisplayVegetations(&puser, -camera.GetYaw(), fTime(), fElapsed());
 	xEffect::EndClip();
@@ -298,89 +298,89 @@ void  xGame::DrawMenu(void) {
 	camera.UpdateMove(fElapsed(), fTime());
 
 	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-	this->Begin2D();//Technoteam: неоправданное использование this
+	this->Begin2D();//Technoteam: РЅРµРѕРїСЂР°РІРґР°РЅРЅРѕРµ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ this
 
-		xEffect::ModeAlpha(&GLCOLOR(0.0f, 0.0f, 0.0f, 0.4f));//Technoteam: Магические числа
+		xEffect::ModeAlpha(&GLCOLOR(0.0f, 0.0f, 0.0f, 0.4f));//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 		xTextura::Enabled(GL_FALSE);
-		for(int i = 0; i < MAX_BUTTONS; i++) { // вывод кнопок
+		for(int i = 0; i < MAX_BUTTONS; i++) { // РІС‹РІРѕРґ РєРЅРѕРїРѕРє
 			xRect2D::DrawRect(buttons[i].color, buttons[i].x, buttons[i].y, buttons[i].width, buttons[i].height);
 			buttons[i].MouseMove(&pt);
 		}
 		xTextura::Enabled(GL_TRUE);
 		xEffect::EndAlpha();
 
-		xRect2D::DrawRectTex(terrain->tHouse(0), Screen().cx / 2 - 220, 40, 440, 142, 2.0f);//Technoteam: Магические числа
+		xRect2D::DrawRectTex(terrain->tHouse(0), Screen().cx / 2 - 220, 40, 440, 142, 2.0f);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 
-		xEffect::ModeClip(0.6f);//Technoteam: Магические числа
+		xEffect::ModeClip(0.6f);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 
-		xFont::DisplayFontText(tex_alpha, descgame, Screen().cx / 2 - _tcslen(descgame) * 14 / 2, 200, 14, 17, &GLVECTOR2(7.0f, 5.0f));//Technoteam: Магические числа
+		xFont::DisplayFontText(tex_alpha, descgame, Screen().cx / 2 - _tcslen(descgame) * 14 / 2, 200, 14, 17, &GLVECTOR2(7.0f, 5.0f));//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 		
 	
-		GLfloat alpha = 0.2f + 0.8f * powf(cosf(fTime() / 300.0f), 2.0f);//Technoteam: Магические числа
+		GLfloat alpha = 0.2f + 0.8f * powf(cosf(fTime() / 300.0f), 2.0f);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 		glColor4f(alpha, 1.0f, alpha, 1.0f);
 		const TCHAR* str = _T("");
-		xFont::DisplayFontText(tex_alpha, str, Screen().cx / 2 - _tcslen(str) * 38 / 2, 70, 38, 80, &GLVECTOR2(7.0f, 5.0f));//Technoteam: Магические числа
+		xFont::DisplayFontText(tex_alpha, str, Screen().cx / 2 - _tcslen(str) * 38 / 2, 70, 38, 80, &GLVECTOR2(7.0f, 5.0f));//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 		
 		glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-		const TCHAR* author = _T("САННИКОВ КУЛЕБЯКИН СТУПАК И ПАРХОМЕНКО");
-		xFont::DisplayFontText(tex_alpha, author, Screen().cx / 2 - _tcslen(author) * 15 / 2, Screen().cy - 30, 15, 20, &GLVECTOR2(7.0f, 5.0f));//Technoteam: Магические числа
+		const TCHAR* author = _T("РЎРђРќРќРРљРћР’ РљРЈР›Р•Р‘РЇРљРРќ РЎРўРЈРџРђРљ Р РџРђР РҐРћРњР•РќРљРћ");
+		xFont::DisplayFontText(tex_alpha, author, Screen().cx / 2 - _tcslen(author) * 15 / 2, Screen().cy - 30, 15, 20, &GLVECTOR2(7.0f, 5.0f));//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 
 		glColor4f(1.0f, 0.5f, 0.0f, 1.0f);
-		for(int c = 0; c < MAX_BUTTONS; c++) // вывод надписи на кнопки
-			xFont::DisplayFontText(tex_alpha, buttons[c].caption, buttons[c].x + buttons[c].width / 2 - _tcslen(buttons[c].caption) * 15 / 2, buttons[c].y + buttons[c].height / 2 - 20/2, 15, 20, &GLVECTOR2(7.0f, 5.0f));//Technoteam: Магические числа
+		for(int c = 0; c < MAX_BUTTONS; c++) // РІС‹РІРѕРґ РЅР°РґРїРёСЃРё РЅР° РєРЅРѕРїРєРё
+			xFont::DisplayFontText(tex_alpha, buttons[c].caption, buttons[c].x + buttons[c].width / 2 - _tcslen(buttons[c].caption) * 15 / 2, buttons[c].y + buttons[c].height / 2 - 20/2, 15, 20, &GLVECTOR2(7.0f, 5.0f));//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 		glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 
-		xRect2D::DrawRectTex(tex_cursor, pt.x - 16, pt.y - 16, 32, 32);//Technoteam: Магические числа
+		xRect2D::DrawRectTex(tex_cursor, pt.x - 16, pt.y - 16, 32, 32);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 
 		xEffect::EndClip();
-	this->End2D();//Technoteam: неоправданное использование this
+	this->End2D();//Technoteam: РЅРµРѕРїСЂР°РІРґР°РЅРЅРѕРµ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ this
 
 	xTextura::Enabled(GL_FALSE);
 }
 
-// метод рисует диалог проигрыша
+// РјРµС‚РѕРґ СЂРёСЃСѓРµС‚ РґРёР°Р»РѕРі РїСЂРѕРёРіСЂС‹С€Р°
 void  xGame::DrawGameOver(void) {
 
-	const TCHAR* cmds[2] = { _T("НАЧАТЬ ЗАНОВО ЕНТЕР"), _T("ВЫХОД ЕСКЭЙПЕ") };
+	const TCHAR* cmds[2] = { _T("РќРђР§РђРўР¬ Р—РђРќРћР’Рћ Р•РќРўР•Р "), _T("Р’Р«РҐРћР” Р•РЎРљР­Р™РџР•") };
 
 	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-	this->Begin2D();//Technoteam: неоправданное использование this
+	this->Begin2D();//Technoteam: РЅРµРѕРїСЂР°РІРґР°РЅРЅРѕРµ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ this
 	xRect2D::DrawRectTex(terrain->tSkull(), 0, 0, Screen().cx, Screen().cy, 5.0f);
 
 	xEffect::ModeClip(0.6f); 
 
 	xTextura::Enabled(GL_FALSE);	
 	xEffect::ModeAlpha(&GLCOLOR(0.0f, 0.0f, 0.0f, 0.1f), GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	xRect2D::DrawRect(&GLCOLOR(0.4f, 0.2f, 0.1f, 0.7f), Screen().cx / 2 - 300, Screen().cy / 2 - 100, 600, 200);//Technoteam: Магические числа
-	xRect2D::DrawRect(&GLCOLOR(0.0f, 0.4f, 0.3f, 0.8f), Screen().cx / 2 - 200, Screen().cy / 2 + 120, 400, 120);//Technoteam: Магические числа 
+	xRect2D::DrawRect(&GLCOLOR(0.4f, 0.2f, 0.1f, 0.7f), Screen().cx / 2 - 300, Screen().cy / 2 - 100, 600, 200);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
+	xRect2D::DrawRect(&GLCOLOR(0.0f, 0.4f, 0.3f, 0.8f), Screen().cx / 2 - 200, Screen().cy / 2 + 120, 400, 120);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р° 
 	xEffect::EndAlpha();
 
 	xTextura::Enabled(GL_TRUE);
 
 	
-	GLfloat alpha = 0.4f + 0.5f * powf(cosf(fTime() / 400.0f), 2.0f);//Technoteam: Магические числа
+	GLfloat alpha = 0.4f + 0.5f * powf(cosf(fTime() / 400.0f), 2.0f);//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 
 	glColor4f(alpha, 0.0f, 0.0f, 1.0f);
-	const TCHAR* str = _T("ВЫ ПРОИГРАЛИ БИТВУ");
-	xFont::DisplayFontText(tex_alpha, str, Screen().cx / 2 - _tcslen(str) * 30 / 2, Screen().cy / 2 - 40 / 2, 30, 40, &GLVECTOR2(7.0f, 5.0f));//Technoteam: Магические числа
+	const TCHAR* str = _T("Р’Р« РџР РћРР“Р РђР›Р Р‘РРўР’РЈ");
+	xFont::DisplayFontText(tex_alpha, str, Screen().cx / 2 - _tcslen(str) * 30 / 2, Screen().cy / 2 - 40 / 2, 30, 40, &GLVECTOR2(7.0f, 5.0f));//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 
 
-	// вывод название комманд клавиш
+	// РІС‹РІРѕРґ РЅР°Р·РІР°РЅРёРµ РєРѕРјРјР°РЅРґ РєР»Р°РІРёС€
 	glColor4f(alpha, alpha, 0.5f, 1.0f);
-	xFont::DisplayFontText(tex_alpha, cmds[0], Screen().cx / 2 - _tcslen(cmds[0]) * 20 / 2, Screen().cy / 2 + 140, 20, 30, &GLVECTOR2(7.0f, 5.0f));//Technoteam: Магические числа
-	xFont::DisplayFontText(tex_alpha, cmds[1], Screen().cx / 2 - _tcslen(cmds[1]) * 20 / 2, Screen().cy / 2 + 190, 20, 30, &GLVECTOR2(7.0f, 5.0f));//Technoteam: Магические числа
+	xFont::DisplayFontText(tex_alpha, cmds[0], Screen().cx / 2 - _tcslen(cmds[0]) * 20 / 2, Screen().cy / 2 + 140, 20, 30, &GLVECTOR2(7.0f, 5.0f));//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
+	xFont::DisplayFontText(tex_alpha, cmds[1], Screen().cx / 2 - _tcslen(cmds[1]) * 20 / 2, Screen().cy / 2 + 190, 20, 30, &GLVECTOR2(7.0f, 5.0f));//Technoteam: РњР°РіРёС‡РµСЃРєРёРµ С‡РёСЃР»Р°
 
 	xEffect::EndClip();
 
-	this->End2D();//Technoteam: неоправданное использование this
+	this->End2D();//Technoteam: РЅРµРѕРїСЂР°РІРґР°РЅРЅРѕРµ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ this
 
-	// выход из игры
+	// РІС‹С…РѕРґ РёР· РёРіСЂС‹
 	if(GetAsyncKeyState(VK_ESCAPE) & 0x8000) {
 		state_game = GAME_QUIT;
 		SendMessage(Handle(), WM_DESTROY, 0, 0);
-	} else if(GetAsyncKeyState(VK_RETURN) & 0x8000) { // начать заново играть
+	} else if(GetAsyncKeyState(VK_RETURN) & 0x8000) { // РЅР°С‡Р°С‚СЊ Р·Р°РЅРѕРІРѕ РёРіСЂР°С‚СЊ
 		state_game = GAME_START;
-		this->Initialize();//Technoteam: неоправданное использование this
+		this->Initialize();//Technoteam: РЅРµРѕРїСЂР°РІРґР°РЅРЅРѕРµ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ this
 		Sleep(500uL);
 	}
 }
