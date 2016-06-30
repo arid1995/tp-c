@@ -2,6 +2,7 @@
 	Автор(с): Санников, Кулебякин, Ступак и Пархоменко
 	Название команды: AGRAGE
 	e-mail:   sdk96@mail.ru
+	Checked: on the surface by arid1995
 */
 #if ! defined(_GLACTON_VILLAGE_)
 #define _GLACTON_VILLAGE_
@@ -10,17 +11,13 @@
 #endif
 #define  MAX_HOUSES  8
 
-
-
-
+//Technoteam: Структуры лучше вынести в отдельный файл
 
 // структура для плазменной пули
 struct sBullet {
 	GLVECTOR3  pos;
 	GLVECTOR3  vec;
 };
-
-
 
 // Пользователь от первого лица
 class  xUser {
@@ -66,15 +63,7 @@ public:
 	}
 };
 
-
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
 
 
 // структура для робота "марки - TM"
@@ -104,6 +93,7 @@ struct  sRobotTM {
 	sRobotTM(const LPGLVECTOR3& user_pos, GLfloat x, GLfloat z) {
 		this->Initialize(user_pos, x, z);
 	}
+	
 
 	// инициализация
 	void  Initialize(const LPGLVECTOR3& user_pos, GLfloat x, GLfloat z) {
@@ -138,8 +128,6 @@ struct  sRobotTM {
 		snd_move->SetVolume(DSBVOLUME_MIN);
 	}
 
-
-
 	// всякие полезные действия по анимации-движения
 	void  UpdateMove(const LPGLVECTOR3& user_pos, GLfloat cube, GLfloat felapsed, GLfloat ftime) {
 	
@@ -167,20 +155,18 @@ struct  sRobotTM {
 			}
 			
 			// если в радиусе пользователь окажется взять направление на него
-			if(IsCollisionSphere(&pos, 25.0f, user_pos, 25.0f))
+			if(IsCollisionSphere(&pos, 25.0f, user_pos, 25.0f))//Technoteam: Магические числа
 				primary_task = 0;
 		}
-		angle -= fNUM(felapsed, 290.0f);
+		angle -= fNUM(felapsed, 290.0f);//Technoteam: Магические числа
 
 		// через каждую секунду регулировка грмоксоти звка на расстояние между пользователем
-		if((ftime - time_sound) > 1000.0f) {
+		if((ftime - time_sound) > 1000.0f) {//Technoteam: Магические числа
 			time_sound = ftime;
-			this->volume_ctrl(user_pos);
+			this->volume_ctrl(user_pos);//Technoteam: Неоправданный this
 		}
 
 	}
-
-
 
 	// вывод дыма и взрыва
 	void  DisplayEffect(const LPGLVECTOR3& user_pos, GLuint tex, GLfloat angleY, GLfloat felapsed, GLfloat ftime) {
@@ -189,8 +175,8 @@ struct  sRobotTM {
 
 		if(uron) {  // обработка урона
 			xTextura::Set(tex);
-			fsmoke -= fNUM(felapsed, 1.4f);
-			xModel::DrawRect(&GLVECTOR3(pos.x, pos.y + 5.5f, pos.z), fRAND(5, 9), angleY); 
+			fsmoke -= fNUM(felapsed, 1.4f);//Technoteam: Магические числа
+			xModel::DrawRect(&GLVECTOR3(pos.x, pos.y + 5.5f, pos.z), fRAND(5, 9), angleY); //Technoteam: Магические числа
 			if(fsmoke < 0.1f)
 				uron = FALSE;
 		}
@@ -199,7 +185,7 @@ struct  sRobotTM {
 		if(crush) { // обработка взрыва
 			const GLfloat cadr = 1.0f / 3.0f;
 
-			if((ftime - time_crush) > 70.0f) {
+			if((ftime - time_crush) > 70.0f) {//Technoteam: Магическое число
 				time_crush = ftime;
 				cadrs.x   += cadr;
 				if(cadrs.x >= 1.0f) {
@@ -209,21 +195,21 @@ struct  sRobotTM {
 						cadrs = 0.0f;
 						crush = FALSE;
 						
-						GLfloat rex = -500 + 10.0f;
-						GLfloat rez = -500 + fRAND(0, (int)500 * 2);
+						GLfloat rex = -500 + 10.0f;//Technoteam: Магические числа
+						GLfloat rez = -500 + fRAND(0, (int)500 * 2);//Technoteam: Магические числа
 					
 						if((rand() % 2) != 0) {
-							rex =  500 - 10.0f;
-							rez = -255 + fRAND(1, (int)500);
+							rex =  500 - 10.0f;//Technoteam: Магические числа
+							rez = -255 + fRAND(1, (int)500);//Technoteam: Магические числа
 						}
 
-						this->Initialize(user_pos, rex, rez);
+						this->Initialize(user_pos, rex, rez);//Technoteam: Неоправданный this
 						return;
 					}
 				}
 			}
 			xTextura::Set(tex);
-			xModel::DrawAnimationSprite(&GLVECTOR3(pos.x, pos.y + 5.5f, pos.z), &GLVECTOR3(8.0f, 8.0f, 0.0f), angleY, &cadrs, &GLVECTOR2(cadr)); 
+			xModel::DrawAnimationSprite(&GLVECTOR3(pos.x, pos.y + 5.5f, pos.z), &GLVECTOR3(8.0f, 8.0f, 0.0f), angleY, &cadrs, &GLVECTOR2(cadr));//Technoteam: Магические числа 
 		}
 
 	}
@@ -245,7 +231,7 @@ struct  sRobotTM {
 		if(crush)
 			return 0;
 		
-		if(IsCollisionSphere(&GLVECTOR3(pos.x, pos.y + 4.0f, pos.z), 3.3f, vpos, radius)) {
+		if(IsCollisionSphere(&GLVECTOR3(pos.x, pos.y + 4.0f, pos.z), 3.3f, vpos, radius)) {//Technoteam: Магические числа
 			primary_task = 0;
 			if(--life > 0) {
 				uron    = TRUE;
@@ -273,16 +259,11 @@ struct  sRobotTM {
 	void  volume_ctrl(const LPGLVECTOR3& user_pos) {
 		GLfloat len = VectorLength(&(*user_pos - pos));
 		len         = ABS(len);
-		if(len <= 150.0f)
+		if(len <= 150.0f)//Technoteam: Магическое число
 			snd_move->SetVolume(max(DSBVOLUME_MAX - len * 6L, DSBVOLUME_MIN));
 	}
 	
 };
-
-
-
-
-
 
 // структура для летающего робота
 struct  sRobotFly {
@@ -310,12 +291,11 @@ struct  sRobotFly {
 		this->Initialize(user_pos, x, z);
 	}
 
-
-
+	//Technoteam: Определение методов внутри класса/структуры
 	// инициализация
 	void  Initialize(const LPGLVECTOR3& user_pos, GLfloat x, GLfloat z) {
 		pos.x  = x;
-		pos.y  = 90.0f + fRAND(1, 21);
+		pos.y  = 90.0f + fRAND(1, 21);//Technoteam: Магические числа
 		pos.z  = z;
 		life   = 7;
 		fangle = 0.0f;
@@ -328,11 +308,10 @@ struct  sRobotFly {
 			VectorSubtract(&vec, &pos, user_pos);
 			rotY   = atan2f(vec.x, vec.z) * 180.0f / GL_PI;
 			VectorNormalize(&vec);
-			vec   *= 0.9f;
+			vec   *= 0.9f;//Technoteam: Магическое число
 			vec.y  = 0.0f;
 		}
 	}
-
 
 	// всякие полезные действия
 	void  UpdateMove(const LPGLVECTOR3& user_pos, GLfloat cube, GLfloat felapsed, GLfloat ftime) {
@@ -345,12 +324,12 @@ struct  sRobotFly {
 			VectorSubtract(&vec, &pos, user_pos);
 			rotY   = fDEGREE(atan2f(vec.x, vec.z));
 			VectorNormalize(&vec);
-			vec   *= 0.9f;
-			pos   -= vec * fNUM(felapsed, 24.0f);
+			vec   *= 0.9f;//Technoteam: Магическое число
+			pos   -= vec * fNUM(felapsed, 24.0f);//Technoteam: Магическое число
 
 		} else if(task & TASK_MOVE) {  // простой полёт
 
-			pos   -= vec * fNUM(felapsed, 24.0f);
+			pos   -= vec * fNUM(felapsed, 24.0f);//Technoteam: Магическое число
 			if((pos.x > cube) || (pos.x < -cube) || (pos.z > cube) || (pos.z < -cube)) { // всё улутели за край мира(skybox) с генерировать новую позицию-задачу
 				
 				GLfloat rex = -cube + 10.0f;
@@ -367,8 +346,6 @@ struct  sRobotFly {
 		fangle += fNUM(felapsed, 8.0f);
 	}
 
-
-
 	// вывод дыма и взрыва
 	void  DisplayEffect(const LPGLVECTOR3& user_pos, GLuint tex, GLfloat angleY, GLfloat felapsed, GLfloat ftime) {
 		
@@ -376,7 +353,7 @@ struct  sRobotFly {
 
 		if(uron) {  // обработка урона
 			xTextura::Set(tex);
-			fsmoke -= fNUM(felapsed, 1.4f);
+			fsmoke -= fNUM(felapsed, 1.4f);//Technoteam: Магическое число
 			xModel::DrawRect(&pos, fRAND(5, 9), angleY); 
 			if(fsmoke < 0.1f)
 				uron = FALSE;
@@ -386,7 +363,7 @@ struct  sRobotFly {
 		if(crush) { // обработка взрыва
 			const GLfloat cadr = 1.0f / 3.0f;
 
-			if((ftime - time_crush) > 70.0f) {
+			if((ftime - time_crush) > 70.0f) {//Technoteam: Магическое число
 				time_crush = ftime;
 				cadrs.x   += cadr;
 				if(cadrs.x >= 1.0f) {
@@ -396,12 +373,12 @@ struct  sRobotFly {
 						cadrs = 0.0f;
 						crush = FALSE;
 						
-						GLfloat rex = -500 + 10.0f;
-						GLfloat rez = -500 + fRAND(0, (int)500 * 2);
+						GLfloat rex = -500 + 10.0f;//Technoteam: Магическое число
+						GLfloat rez = -500 + fRAND(0, (int)500 * 2);//Technoteam: Магическое число
 					
 						if((rand() % 2) != 0) {
-							rex =  500 - 10.0f;
-							rez = -255 + fRAND(1, (int)500);
+							rex =  500 - 10.0f;//Technoteam: Магические число
+							rez = -255 + fRAND(1, (int)500);//Technoteam: Магическое число
 						}
 
 						this->Initialize(user_pos, rex, rez);
@@ -455,14 +432,7 @@ struct  sRobotFly {
 	}
 };
 
-
-
-
-
-
-
-
-
+//Technoteam: Жеалательно делать один класс в одном файле
 // Класс-карта высот, загружает карту из файла .RAW
 class  xTerrain {
 
